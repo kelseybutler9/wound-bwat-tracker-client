@@ -4,7 +4,7 @@ export default class FormRowInput extends React.Component {
     render() {
         const Element = this.props.element || 'input';
 
-        if(choices==[]) {
+        if(typeof choices !== 'undefined' && choices.length > 0) {
           Element =
             <Element
                 {...this.props.input}
