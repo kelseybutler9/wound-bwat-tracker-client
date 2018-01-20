@@ -32,9 +32,10 @@ export class ClientForm extends React.Component {
               )}>
               // {successMessage} Added in for API
               // {errorMessage}
+              <h2>Client</h2>
               <FormCategoryRow title="Client Name"/>
                 <Field name="first-name" type="text" label="First Name" component={FormRowInput} validate={[required, nonEmpty]} />
-                <Field name="last-name" type="text" label="Lase Name" component={FormRowInput} validate={[required, nonEmpty]} />
+                <Field name="last-name" type="text" label="Last Name" component={FormRowInput} validate={[required, nonEmpty]} />
               <FormCategoryRow title="Client Location" />
                 <Field name="hopsital-name" type="text" label="Hospital Name" component={FormRowInput} validate={[required, nonEmpty]} />
                 <Field name="city" type="text" label="City" component={FormRowInput} validate={[required, nonEmpty]} />

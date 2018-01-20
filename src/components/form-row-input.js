@@ -1,41 +1,38 @@
 import React from 'react';
 
 export default class FormRowInput extends React.Component {
-    // componentDidUpdate(prevProps) {
-    //     if (!prevProps.meta.active && this.props.meta.active) {
-    //         this.input.focus();
-    //     }
-    // } may be relevant for API
     render() {
         const Element = this.props.element || 'input';
 
-        // let error;
-        // if (this.props.meta.touched && this.props.meta.error) {
-        //     error = <div className="form-error">{this.props.meta.error}</div>;
-        // }
-        //
-        // let warning;
-        // if (this.props.meta.touched && this.props.meta.warning) {
-        //     warning = (
-        //         <div className="form-warning">{this.props.meta.warning}</div>
-        //     );
-        // }
+        if(choices==[]) {
+          Element =
+            <Element
+                {...this.props.input}
+                id={this.props.input.name}
+                type={this.props.type}
+                ref={input => (this.input = input)}  >
+                {this.props.children}
+            </Element>
+        }
+        else {
+          let choices = this.props.choices;
+          let values = this.props.values;
+          let options = '';
+          choices.forEach(choice, index => {
+            options += `<option value="${values[index]}">${choice}</option>`;
+          })
+          Element =
+            <select>
+              {options}
+            </select>
+        }
 
         return (
             <div className="form-row-input">
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
-                    // {error}
-                    // {warning}
                 </label>
-                <Element
-                    {...this.props.input}
-                    id={this.props.input.name}
-                    type={this.props.type}
-                    ref={input => (this.input = input)}
-                >
-                    {this.props.children}
-                </Element>
+                {Element}
             </div>
         );
     }
