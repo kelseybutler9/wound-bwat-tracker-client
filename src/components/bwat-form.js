@@ -18,6 +18,9 @@ export class ClientForm extends React.Component {
                 this.onSubmit(values)
               )}>
               <h2>BWAT Wound Form</h2>
+              <Field name="client-type" label="Is the client new or existing?" type="text" component={FormRowInput} validate={[required, nonEmpty]} choices=[Existing Client, New Client] values=[Existing, New]>
+              <Field name="client" type="text" label="Select the correct client name" component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
+
               <Field name="date-of-form" type="date" label="Date of Form" component={FormRowInput} validate={[required, nonEmpty]} choices=[] values=[] />
               <FormCategoryRow title="Wound Information"/>
               <Field
