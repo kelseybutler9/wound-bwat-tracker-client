@@ -4,34 +4,19 @@ import FormCategoryRow from './form-category-row';
 import FormRowInput from './form-row-input';
 import {required, nonEmpty} from '../validators';
 
+import './client-form.css'
+
 export class ClientForm extends React.Component {
     onSubmit(values) {
         console.log(values);
     }
     //refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
     render() {
-        // let successMessage; Added in for API
-        // let errorMessage;
-        // if (this.props.submitSucceeded) {
-        //     successMessage = (
-        //         <div className="message message-success">
-        //             Message submitted successfully
-        //         </div>
-        //     );
-        // }
-        // if (this.props.error) {
-        //     errorMessage = (
-        //         <div className="message message-error">{this.props.error}</div>
-        //     );
-        // }
-
         return (
             <form
               onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)
               )}>
-              // {successMessage} Added in for API
-              // {errorMessage}
               <h2>Client</h2>
               <FormCategoryRow title="Client Name"/>
                 <Field name="first-name" type="text" label="First Name" component={FormRowInput} validate={[required, nonEmpty]} />

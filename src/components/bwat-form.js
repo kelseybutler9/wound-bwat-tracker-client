@@ -2,6 +2,7 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import FormCategoryRow from './form-category-row';
 import FormRowInput from './form-row-input';
+import FormRowDisplay from './form-row-display';
 import {required, nonEmpty} from '../validators';
 
 export class ClientForm extends React.Component {
@@ -328,6 +329,7 @@ export class ClientForm extends React.Component {
                         4,
                         5
                 ]/>
+              <FormRowDisplay title="Weekly Score" value=13>//update to update score on submit
               <button type="submit" diabled={this.props.pristine || this.props.submitting}>Update Client</button>
             </form>
         );
