@@ -4,9 +4,10 @@ import './form-row-input.css';
 export default class FormRowInput extends React.Component {
     render() {
         const Element = this.props.element || 'input';
+        let ElementComponent;
 
-        if(typeof choices !== 'undefined' && choices.length > 0) {
-          Element =
+        if(typeof this.props.choices !== 'undefined' && this.props.choices.length > 0) {
+          ElementComponent =
             <Element
                 {...this.props.input}
                 id={this.props.input.name}
@@ -19,10 +20,10 @@ export default class FormRowInput extends React.Component {
           let choices = this.props.choices;
           let values = this.props.values;
           let options = '';
-          choices.forEach(choice, index => {
+          choices.forEach((choice, index) => {
             options += `<option value="${values[index]}">${choice}</option>`;
           })
-          Element =
+          ElementComponent =
             <select>
               {options}
             </select>
@@ -33,7 +34,7 @@ export default class FormRowInput extends React.Component {
                 <label htmlFor={this.props.input.name}>
                     {this.props.label}
                 </label>
-                {Element}
+                {ElementComponent}
             </div>
         );
     }

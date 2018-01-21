@@ -3,8 +3,10 @@ import './form-row-display.css';
 
 export function FormRowDisplay(props) {
       return (
-        <p className={props.class}>{props.title}</p>
-        <p className={props.class}>{props.value}</p>
+        <div class="row-display">
+          <p className={props.class}>{props.title}</p>
+          <p className={props.class}>{props.value}</p>
+        </div>
       );
 };
 

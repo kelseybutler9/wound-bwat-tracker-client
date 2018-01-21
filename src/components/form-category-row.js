@@ -10,5 +10,5 @@ export default function FormCategoryRow(props) {
 };
 
 FormCategoryRow.defaultProps = {
-  title: '';
+  title: ''
 };
