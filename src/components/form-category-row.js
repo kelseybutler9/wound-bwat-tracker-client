@@ -7,4 +7,8 @@ export default function FormCategoryRow(props) {
             {props.title}
           </h3>
       );
-}
+};
+
+FormCategoryRow.defaultProps = {
+  title: '';
+};
