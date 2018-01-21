@@ -13,10 +13,7 @@ export class ClientForm extends React.Component {
     //refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
     render() {
         return (
-            <form
-              onSubmit={this.props.handleSubmit(values =>
-                this.onSubmit(values)
-              )}>
+            <form>
               <h2>Client</h2>
               <FormCategoryRow title="Client Name"/>
                 <Field name="first-name" type="text" label="First Name" component={FormRowInput} validate={[required, nonEmpty]} />

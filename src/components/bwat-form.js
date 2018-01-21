@@ -3,9 +3,11 @@ import {reduxForm, Field} from 'redux-form';
 import FormCategoryRow from './form-category-row';
 import FormRowInput from './form-row-input';
 import FormRowDisplay from './form-row-display';
+import ClientForm from './client-form';
+import TopNav from './top-nav';
 import {required, nonEmpty} from '../validators';
 
-export class ClientForm extends React.Component {
+export class BWATForm extends React.Component {
     onSubmit(values) {
         console.log(values);
     }
@@ -20,7 +22,7 @@ export class ClientForm extends React.Component {
               <h2>BWAT Wound Form</h2>
               <Field name="client-type" label="Is the client new or existing?" type="text" component={FormRowInput} validate={[required, nonEmpty]} choices=[Existing Client, New Client] values=[Existing, New]>
               <Field name="client" type="text" label="Select the correct client name" component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
-
+              <ClientForm />
               <Field name="date-of-form" type="date" label="Date of Form" component={FormRowInput} validate={[required, nonEmpty]} choices=[] values=[] />
               <FormCategoryRow title="Wound Information"/>
               <Field
