@@ -1,7 +1,7 @@
 import React from 'react';
 import './form-row-display.css';
 
-export function FormRowDisplay(props) {
+export default function FormRowDisplay(props) {
       return (
         <div class="row-display">
           <p className={props.class}>{props.title}</p>

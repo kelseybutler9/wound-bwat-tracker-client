@@ -8,15 +8,26 @@ import TopNav from './top-nav';
 import {required, nonEmpty} from '../validators';
 
 export class BWATForm extends React.Component {
-    onSubmit(values) {
-        console.log(values);
-    }
+    onSubmit(e) {
+
+        e.preventDefault();
+        // var form = document.forms.issueAdd;
+        // this.props.createBWAT({
+        //   owner: form.owner.value,
+        //   title: form.title.value,
+        //   status: 'New',
+        //   created: new Date(),
+        // });
+        // clear the form for the next input
+        //form.owner.value = ""; form.title.value = "";
+      }
+
     //refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
     render() {
       let clients = ["client one", "client two"];
       let clientIds = ["123", "2457"];
 
-        return (
+      return (
             <form
               onSubmit={this.props.handleSubmit(values =>
                 this.onSubmit(values)

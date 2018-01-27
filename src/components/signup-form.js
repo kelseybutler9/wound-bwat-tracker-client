@@ -1,11 +1,12 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
+import FormRowInput from './form-row-input';
 
-export function FormRowDisplay(props) {
+export default function FormRowDisplay(props) {
       return (
         <form>
-          <h1><Welcome to the Wound Care Progression Tool></h1>
+          <h1>Welcome to the Wound Care Progression Tool</h1>
           <h2>Sign Up</h2>
           <h3>Enter a valid Username and Password</h3>
           <p>A valid password will have at least 8 characters</p>
