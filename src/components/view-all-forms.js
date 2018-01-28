@@ -7,19 +7,20 @@ import TopNav from './top-nav';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 
-export class ViewAllForms extends React.component {
+export class ViewAllForms extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clients = [{clientId: 1, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 19, weight: 145}, {clientId: 2, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 32, weight: 150}],
-      forms = [{id: 12, clientId: 1, week: "1/2/2018", score: 12}, {id: 13,clientId: 2, week: "2/13/2018", score: 14}]
+      clients: [{clientId: 1, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 19, weight: 145}],
+      forms: [{id: 12, clientId: 1, week: "1/2/2018", score: 12}, {id: 13,clientId: 2, week: "2/13/2018", score: 14}]
     }
   }
     render() {
-      const clients = this.props.clients.map((client) =>
-          const clientName = `${client.firstName} ${client.lastName}`;
-          return clientName;
-      )
+      let clientChoices = ["ClientOne"];
+      let clientIds = ["1","2"];
+      // this.props.clients.forEach((client) =>
+      //      clientChoices.push({firstName: {client.firstName}, lastName: {client.lastName}});
+      // )
 
       const BWATForms = this.props.forms.map((formId, index) =>
         <div class="bwat-previews" clientId={formId.clientId}>
@@ -31,7 +32,7 @@ export class ViewAllForms extends React.component {
         return (
             <div class="view-client">
               <h2>Client</h2>
-              <Field name="client" type="text" label="Select the correct client name" component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
+              <Field name="client" type="text" label="Select the correct client name" component={FormRowInput} validate={[required, nonEmpty]} choices={clientChoices} values={clientIds} />
               //when client name is submitted, use api to set props from client
               <FormCategoryRow title="Client Name"/>
               <FormRowDisplay className="client" title="First Name" answer={this.props.firstName}/>
@@ -51,9 +52,9 @@ export class ViewAllForms extends React.component {
               <FormRowDisplay className="client" title="Weight" answer={this.props.weight}/>
             </div>
 
-            <div class="view-forms">
-              {BWATForms}
-            </div>
+            // <div class="view-forms">
+            //   {BWATForms}
+            // </div>
 
             //link to other pages
         );

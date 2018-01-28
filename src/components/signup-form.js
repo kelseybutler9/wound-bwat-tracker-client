@@ -3,7 +3,7 @@ import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
 import FormRowInput from './form-row-input';
 
-export default function FormRowDisplay(props) {
+export default function SignUp(props) {
       return (
         <form>
           <h1>Welcome to the Wound Care Progression Tool</h1>
@@ -18,7 +18,7 @@ export default function FormRowDisplay(props) {
       );
 };
 
-FormRowDisplay.defaultProps = {
+SignUp.defaultProps = {
     title: '',
     value: ''
 };

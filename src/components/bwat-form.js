@@ -11,7 +11,7 @@ export class BWATForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      clients = [{clientId: 1, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 19, weight: 145}, {clientId: 2, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 32, weight: 150}],
+      clients : [{clientId: 1, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 19, weight: 145}, {clientId: 2, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 32, weight: 150}],
     }
   }
 
@@ -32,7 +32,9 @@ export class BWATForm extends React.Component {
 
     //refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
     render() {
-
+      let clients = ["Client One"];
+      let clientIds = ["1", "2"];
+      
       return (
             <form
               onSubmit={this.props.handleSubmit(values =>
