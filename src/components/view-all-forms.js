@@ -16,11 +16,10 @@ export class ViewAllForms extends React.Component {
     };
   }
   render () {
-    const clientChoices = ['ClientOne'];
+    const clientChoices = [''];
     const clientIds = ['1', '2'];
-    this.props.clients.forEach((client) =>
-          //const clientName = client.firstName + client.lastName;
-           clientChoices.push(client.firstName + client.lastName);
+    this.props.clients.forEach(client =>
+        clientChoices.push(`${client.firstName} ${client.lastName}`)
     )
 
     const BWATForms = this.props.forms.map((formId, index) =>
@@ -28,7 +27,7 @@ export class ViewAllForms extends React.Component {
       );
 
     return (
-
+      <div>
       <div class='view-client'>
       <TopNav />
         <h2>Client</h2>
@@ -52,8 +51,9 @@ export class ViewAllForms extends React.Component {
         <FormRowDisplay className='client' title='Weight' answer={this.props.weight} />
       </div>
 
-      <div class="view-forms" >
+      <div class="view-forms">
         {BWATForms}
+      </div>
       </div>
 
             // link to other pages
