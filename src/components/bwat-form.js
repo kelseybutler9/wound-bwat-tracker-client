@@ -8,6 +8,14 @@ import TopNav from './top-nav';
 import {required, nonEmpty} from '../validators';
 
 export class BWATForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clients = [{clientId: 1, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 19, weight: 145}, {clientId: 2, firstName: "first", lastName: "last", hospitalName: "Matilda", city: "LA", clientState: "CA", startDate: "10/13/2018", endDate: "12/14/2019", age: 32, weight: 150}],
+    }
+  }
+
+
     onSubmit(e) {
 
         e.preventDefault();
@@ -24,8 +32,6 @@ export class BWATForm extends React.Component {
 
     //refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
     render() {
-      let clients = ["client one", "client two"];
-      let clientIds = ["123", "2457"];
 
       return (
             <form

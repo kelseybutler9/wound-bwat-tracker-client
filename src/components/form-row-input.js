@@ -2,6 +2,19 @@ import React from 'react';
 import './form-row-input.css';
 
 export default class FormRowInput extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        choices = [{choice: ''}],
+        values = [{value: ''}],
+        element = '',
+        input = '',
+        name = '',
+        type = '',
+        label = ''
+      }
+    }
+
     render() {
         const Element = this.props.element || 'input';
         let ElementComponent;
@@ -17,10 +30,8 @@ export default class FormRowInput extends React.Component {
             </Element>
         }
         else {
-          let choices = this.props.choices;
-          let values = this.props.values;
           let options = '';
-          choices.forEach((choice, index) => {
+          this.props.choices.forEach((choice, index) => {
             options += `<option value="${values[index]}">${choice}</option>`;
           })
           ElementComponent =
