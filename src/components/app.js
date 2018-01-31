@@ -7,7 +7,7 @@ import BWATForm from './bwat-form';
 import LogIn from './login-form';
 import SignUp from './signup-form';
 
-export default function App (props) {
+export default function App(props) {
   return (
     <Router>
       <div className='app'>
@@ -15,7 +15,7 @@ export default function App (props) {
           <h1><Link to='/'>Wound Care BWAT Tracker</Link></h1>
         </header>
         <main>
-          <Route exact path='/' component={Home} />//default link
+          <Route exact path='/' component={Home} />
           <Route exact path='/login' component={LogIn} />
           <Route exact path='/signup' component={SignUp} />
           <Route exact path='/new' component={BWATForm} />

@@ -5,8 +5,8 @@ export default class FormRowInput extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      choices: [{choice: ''}],
-      values: [{value: ''}],
+      choices: [],
+      values: [],
       element: '',
       input: '',
       name: '',
@@ -25,14 +25,16 @@ export default class FormRowInput extends React.Component {
           {...this.props.input}
           id={this.props.input.name}
           type={this.props.type}
-          ref={input => (this.input = input)} >
+          ref={input => (this.props.input = input)} >
           {this.props.children}
         </Element>;
-    } else {
-      let options = '';
-      this.props.choices.forEach((choice, index) => {
-        options += `<option value="${this.props.values[index]}">${choice}</option>`;
-      });
+    }
+    else {
+      const options = <option value="hi">Hi</option>;
+      // const options = this.props.choices.map((choice, index) =>
+      //   <option value={this.props.values[index]}>{choice}</option>
+      // );
+
       ElementComponent =
         <select>
           {options}
