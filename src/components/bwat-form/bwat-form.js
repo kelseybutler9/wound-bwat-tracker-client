@@ -1,11 +1,11 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import FormCategoryRow from './form-category-row';
-import FormRowInput from './form-row-input';
-import FormRowDisplay from './form-row-display';
-import ClientForm from './client-form';
-//import TopNav from './top-nav';
+import FormCategoryRow from './form-category-row/form-category-row';
+import FormRowInput from './form-row-input/form-row-input';
+import FormRowDisplay from './form-row-display/form-row-display';
+import ClientForm from './client-form/client-form';
 import {required, nonEmpty} from '../validators';
+import './bwat-form.css'
 
 export class BWATForm extends React.Component {
   constructor (props) {
@@ -39,7 +39,7 @@ export class BWATForm extends React.Component {
                 this.onSubmit(values)
               )}>
         <h2>BWAT Wound Form</h2>
-        <Field name='client-type' label='Is the client new or existing?' type='text' component={FormRowInput} validate={[required, nonEmpty]} choices={['Existing Client', 'New Client']} values={['Existing', 'New']} />
+        <Field name='client-type' label='Is the client new or existing?' element='select' component={FormRowInput} validate={[required, nonEmpty]} choices={['Existing Client', 'New Client']} values={['Existing', 'New']} />
         <Field name='client' type='text' label='Select the correct client name' component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
         <ClientForm />
         <Field name='date-of-form' type='date' label='Date of Form' component={FormRowInput} validate={[required, nonEmpty]} choices={[]} values={[]} />

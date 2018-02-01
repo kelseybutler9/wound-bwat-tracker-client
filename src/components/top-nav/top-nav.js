@@ -10,7 +10,10 @@ export default function TopNav (props) {
           <div><Link to={`/`}>Home</Link></div>
         </li>
         <li>
-          <div><Link to={`/new`}>New Form</Link></div>
+          <div><Link to={`/new-client`}>New Client</Link></div>
+        </li>
+        <li>
+          <div><Link to={`/new-form`}>New BWAT Form</Link></div>
         </li>
         <li>
           <div><Link to={`/forms`}>View All Forms</Link></div>

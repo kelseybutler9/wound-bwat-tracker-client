@@ -1,11 +1,13 @@
 import React from 'react';
-import FormCategoryRow from './form-category-row';
-import FormRowDisplay from './form-row-display';
-import FormRowInput from './form-row-input';
-import BWATPreview from './bwat-preview';
-import TopNav from './top-nav';
+import FormCategoryRow from './form-category-row/form-category-row';
+import FormRowDisplay from './form-row-display/form-row-display';
+import FormRowInput from './form-row-input/form-row-input';
+import BWATPreview from './bwat-preview/bwat-preview';
+import TopNav from './top-nav/top-nav';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../validators';
+
+import './view-all-forms.css'
 
 export class ViewAllForms extends React.Component {
   constructor (props) {
@@ -20,7 +22,6 @@ export class ViewAllForms extends React.Component {
     const clientIds = [];
     this.props.clients.forEach(client =>
         clientChoices.push(`${client.firstName} ${client.lastName}`)
-        //clientIds.push(`${client.id}`)
     )
 
     const BWATForms = this.props.forms.map((formId, index) =>

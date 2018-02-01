@@ -1,7 +1,9 @@
 import React from 'react';
-import FormCategoryRow from './form-category-row';
-import FormRowDisplay from './form-row-display';
-import TopNav from './top-nav';
+import FormCategoryRow from './form-category-row/form-category-row';
+import FormRowDisplay from './form-row-display/form-row-display';
+import TopNav from './top-nav/top-nav';
+
+import './view-bwat-form.css'
 
 export default function ViewBWATForm (props) {
   const values= [1,2,3];
