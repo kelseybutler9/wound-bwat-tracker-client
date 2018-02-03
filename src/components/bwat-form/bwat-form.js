@@ -5,6 +5,7 @@ import FormRowInput from '../form-row-input/form-row-input';
 import FormRowDisplay from '../form-row-display/form-row-display';
 import ClientForm from '../client-form/client-form';
 import {required, nonEmpty} from '.../validators';
+import {Link} from 'react-router-dom';
 import './bwat-form.css'
 
 export class BWATForm extends React.Component {
@@ -18,7 +19,7 @@ export class BWATForm extends React.Component {
 
   onSubmit (e) {
     e.preventDefault();
-        const form = document.forms.bwat;
+        const client = document.forms.client;
         // this.props.createBWAT({
         //   owner: form.owner.value,
         //   title: form.title.value,
@@ -28,7 +29,6 @@ export class BWATForm extends React.Component {
 
         form.date_of_form.value="";
         form.wound_location.value="";
-        
         form.client_id.value = "";
         form.question_one.value = "";
         form.question_two.value="";
@@ -46,9 +46,8 @@ export class BWATForm extends React.Component {
         form.score.value="";
   }
 
-    // refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
   render () {
-    // //let clients = ['Client One'];
+    // let clients = ['Client One'];
     // let clientIds = ['1', '2'];
 
     return (
@@ -61,11 +60,11 @@ export class BWATForm extends React.Component {
           <option>Select an existing client</option>
           {clients.map(client => (
             <option value={client.id} key={client.id}>
-              {client.firstName client.lastName}
+              {client.firstName} {client.lastName}
               </option>
             ))}
         </Field>
-        <button><Link {'/new-client'}>Create New Client</Link></button>
+        <button><Link to={'/new-client'}>Create New Client</Link></button>
         <Field name='client' type='text' label='Select the correct client name' component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
         <ClientForm />
         <Field name='date-of-form' type='date' label='Date of Form' component={FormRowInput} validate={[required, nonEmpty]} choices={[]} values={[]} />
@@ -388,4 +387,4 @@ export class BWATForm extends React.Component {
 
 export default reduxForm({
   form: 'bwat'
-})(ClientForm);
+})(BWATForm);

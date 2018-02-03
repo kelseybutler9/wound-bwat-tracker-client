@@ -21,43 +21,65 @@ export class ClientForm extends React.Component {
       age: '',
       weight: '',
       feedback: '',
-      complete: false
+      complete: false,
+      error: false,
     };
   }
 
   onSubmit (values) {
     console.log(values);
     this.setState({
-      id: client.id.value,
-
-      feedback: 'Client successfully created'
-      complete
+      firstName: client.firstName.value,
+      lastName: client.lastName.value,
+      hospitalName: client.hospitalName.value,
+      city: client.city.value,
+      clientState: client.clientState.value,
+      startDate: client.startDate.value,
+      endDate: client.endDate.value,
+      age: client.age.value,
+      weight: client.weight.value,
+      feedback: 'Client successfully created',
+      complete,
+      error: false
     })
   }
 
   render () {
-    if(this.state.complete) {
-      return (
-        <div>
-          <p>{feedback}</p>
-          <button><Link {'/new-form'} clientId=this.id>Create a BWAT Form for {this.firstName}</Link></button>
-        </div>
-      );
-    }
+
+      let successMessage;
+       if (this.props.complete) {
+           successMessage = (
+             <div>
+               <p>{feedback}</p>
+               <button><Link to={'/new-form'} clientId={this.id}>Create a BWAT Form for {this.firstName}</Link></button>
+             </div>
+           );
+       }
+
+       let errorMessage;
+       if (this.props.error) {
+           errorMessage = (
+             <div>
+               <p>{feedback}</p>
+             </div>
+           );
+       }
 
     return (
       <form>
         <h2>Client</h2>
+        {errorMessage}
+        {successMessage}
         <FormCategoryRow title='Client Name' />
-        <Field name='first-name' type='text' label='First Name' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='last-name' type='text' label='Last Name' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='firstName' type='text' label='First Name' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='lastName' type='text' label='Last Name' component={FormRowInput} validate={[required, nonEmpty]} />
         <FormCategoryRow title='Client Location' />
-        <Field name='hopsital-name' type='text' label='Hospital Name' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='hopsitalName' type='text' label='Hospital Name' component={FormRowInput} validate={[required, nonEmpty]} />
         <Field name='city' type='text' label='City' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='state' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='clientState' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
         <FormCategoryRow title='Time Frame' />
-        <Field name='start-date' label='Start Date' type='date' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='end-date' type='date' label='End Date' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='startDate' label='Start Date' type='date' component={FormRowInput} validate={[required, nonEmpty]} />
+        <Field name='endDate' type='date' label='End Date' component={FormRowInput} validate={[required, nonEmpty]} />
         <FormCategoryRow title='Client Information' />
         <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
         <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
