@@ -1,4 +1,4 @@
-import TopNav from './top-nav/top-nav';
+import TopNav from '../top-nav/top-nav';
 import {Link} from 'react-router-dom';
 import React from 'react';
 import {reduxForm} from 'redux-form';

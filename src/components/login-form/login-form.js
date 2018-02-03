@@ -1,9 +1,9 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {required, nonEmpty} from '../validators';
-import FormRowInput from './form-row-input/form-row-input';
+import {required, nonEmpty} from '.../validators';
+import FormRowInput from '../form-row-input/form-row-input';
 import {Link} from 'react-router-dom';
-import FormRowDisplay from './form-row-display/form-row-display';
+import FormRowDisplay from '../form-row-display/form-row-display';
 import {reduxForm} from 'redux-form';
 
 import './login-form.css';

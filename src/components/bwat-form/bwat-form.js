@@ -1,37 +1,55 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import FormCategoryRow from './form-category-row/form-category-row';
-import FormRowInput from './form-row-input/form-row-input';
-import FormRowDisplay from './form-row-display/form-row-display';
-import ClientForm from './client-form/client-form';
-import {required, nonEmpty} from '../validators';
+import FormCategoryRow from '../form-category-row/form-category-row';
+import FormRowInput from '../form-row-input/form-row-input';
+import FormRowDisplay from '../form-row-display/form-row-display';
+import ClientForm from '../client-form/client-form';
+import {required, nonEmpty} from '.../validators';
 import './bwat-form.css'
 
 export class BWATForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [{clientId: 1, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {clientId: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}]
+      clients: [{id: '1', firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {clientId: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}]
+
     };
   }
 
   onSubmit (e) {
     e.preventDefault();
-        // var form = document.forms.issueAdd;
+        const form = document.forms.bwat;
         // this.props.createBWAT({
         //   owner: form.owner.value,
         //   title: form.title.value,
         //   status: 'New',
         //   created: new Date(),
         // });
-        // clear the form for the next input
-        // form.owner.value = ""; form.title.value = "";
+
+        form.date_of_form.value="";
+        form.wound_location.value="";
+        
+        form.client_id.value = "";
+        form.question_one.value = "";
+        form.question_two.value="";
+        form.question_three.value = "";
+        form.question_four.value = "";
+        form.question_five.value="";
+        form.question_six.value = "";
+        form.question_seven.value="";
+        form.question_eight.value = "";
+        form.question_nine.value = "";
+        form.question_ten.value="";
+        form.question_eleven.value = "";
+        form.question_twelve.value = "";
+        form.question_thirteen.value="";
+        form.score.value="";
   }
 
     // refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
   render () {
-    let clients = ['Client One'];
-    let clientIds = ['1', '2'];
+    // //let clients = ['Client One'];
+    // let clientIds = ['1', '2'];
 
     return (
       <form
@@ -39,7 +57,15 @@ export class BWATForm extends React.Component {
                 this.onSubmit(values)
               )}>
         <h2>BWAT Wound Form</h2>
-        <Field name='client-type' label='Is the client new or existing?' element='select' component={FormRowInput} validate={[required, nonEmpty]} choices={['Existing Client', 'New Client']} values={['Existing', 'New']} />
+        <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
+          <option>Select an existing client</option>
+          {clients.map(client => (
+            <option value={client.id} key={client.id}>
+              {client.firstName client.lastName}
+              </option>
+            ))}
+        </Field>
+        <button><Link {'/new-client'}>Create New Client</Link></button>
         <Field name='client' type='text' label='Select the correct client name' component={FormRowInput} validate={[required, nonEmpty]} choices={clients} values={clientIds} />
         <ClientForm />
         <Field name='date-of-form' type='date' label='Date of Form' component={FormRowInput} validate={[required, nonEmpty]} choices={[]} values={[]} />
@@ -361,5 +387,5 @@ export class BWATForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'client'
+  form: 'bwat'
 })(ClientForm);

@@ -1,8 +1,8 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
-import FormCategoryRow from './form-category-row/form-category-row';
-import FormRowInput from './form-row-input/form-row-input';
-import {required, nonEmpty} from '../validators';
+import FormCategoryRow from '../form-category-row/form-category-row';
+import FormRowInput from '../form-row-input/form-row-input';
+import {required, nonEmpty} from '.../validators';
 
 import './client-form.css';
 
@@ -10,15 +10,41 @@ export class ClientForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [{clientId: 1, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {clientId: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}]
+      id: '',
+      firstName: '',
+      lastName: '',
+      hospitalName: '',
+      city: '',
+      clientState: '',
+      startDate: '',
+      endDate: '',
+      age: '',
+      weight: '',
+      feedback: '',
+      complete: false
     };
   }
 
   onSubmit (values) {
     console.log(values);
+    this.setState({
+      id: client.id.value,
+
+      feedback: 'Client successfully created'
+      complete
+    })
   }
-    // refer to this link for reference https://github.com/Thinkful-Ed/redux-contact-form/blob/master/src/components/contact-form.js
+
   render () {
+    if(this.state.complete) {
+      return (
+        <div>
+          <p>{feedback}</p>
+          <button><Link {'/new-form'} clientId=this.id>Create a BWAT Form for {this.firstName}</Link></button>
+        </div>
+      );
+    }
+
     return (
       <form>
         <h2>Client</h2>
@@ -35,7 +61,7 @@ export class ClientForm extends React.Component {
         <FormCategoryRow title='Client Information' />
         <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
         <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
-        <button type='submit' diabled={this.props.pristine || this.props.submitting}>Update Client</button>
+        <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create Client</button>
       </form>
     );
   }
