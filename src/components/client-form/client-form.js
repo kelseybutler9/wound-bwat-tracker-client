@@ -4,6 +4,7 @@ import FormCategoryRow from '../form-category-row/form-category-row';
 import FormRowInput from '../form-row-input/form-row-input';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
+import DatePicker from 'react-date-picker';
 
 import './client-form.css';
 
@@ -12,13 +13,13 @@ export class ClientForm extends React.Component {
     super(props);
     this.state = {
       id: '',
-      firstName: '',
+      firstName: 'Kelsey',
       lastName: '',
       hospitalName: '',
       city: '',
       clientState: '',
-      startDate: '',
-      endDate: '',
+      startDate: new Date(),
+      endDate: new Date(),
       age: '',
       weight: '',
       feedback: '',
@@ -47,10 +48,12 @@ export class ClientForm extends React.Component {
     })
   }
 
+  onChange = date => this.setState({ date });
+
   render () {
 
       let successMessage;
-       if (this.props.complete) {
+       if (this.state.complete) {
            successMessage = (
              <div>
                <p>{this.feedback}</p>
@@ -60,7 +63,7 @@ export class ClientForm extends React.Component {
        }
 
        let errorMessage;
-       if (this.props.error) {
+       if (this.state.error) {
            errorMessage = (
              <div>
                <p>{this.feedback}</p>
@@ -81,8 +84,18 @@ export class ClientForm extends React.Component {
         <Field name='city' type='text' label='City' component={FormRowInput} validate={[required, nonEmpty]} />
         <Field name='clientState' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
         <FormCategoryRow title='Time Frame' />
-        <Field name='startDate' label='Start Date' type='date' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='endDate' type='date' label='End Date' component={FormRowInput} validate={[required, nonEmpty]} />
+        <label>Start Date</label>
+        <DatePicker
+           name='startDate'
+           onChange={this.onChange}
+           value={this.state.startDate}
+        />
+        <label>End Date</label>
+        <DatePicker
+          name='endDate'
+          onChange={this.onChange}
+          value={this.state.endDate}
+        />
         <FormCategoryRow title='Client Information' />
         <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
         <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />

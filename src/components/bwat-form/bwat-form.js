@@ -46,9 +46,9 @@ export class BWATForm extends React.Component {
         bwat.score.value="";
   }
 
+  onChange = date => this.setState({ date });
+
   render () {
-    // let clients = ['Client One'];
-    // let clientIds = ['1', '2'];
 
     return (
       <form
@@ -68,6 +68,12 @@ export class BWATForm extends React.Component {
         // <button><Link to={'/new-client'}>Create New Client</Link></button>
         // <Field name='client' type='text' label='Select the correct client name' component={FormRowInput} validate={[required, nonEmpty]} choices={this.clients} values={clientIds} />
         // <ClientForm />
+        // <label>Date of Form</label>
+        // <DatePicker
+        //    name='date_of_form'
+        //    onChange={this.onChange}
+        //    value={this.state.date_of_form}
+        // />
         // <Field name='date-of-form' type='date' label='Date of Form' component={FormRowInput} validate={[required, nonEmpty]} choices={[]} values={[]} />
         // <FormCategoryRow title='Wound Information' />
         // <Field
