@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {required, nonEmpty} from '.../validators';
+import {required, nonEmpty} from '../../validators';
 import FormRowInput from '../form-row-input/form-row-input';
 import {Link} from 'react-router-dom';
 import FormRowDisplay from '../form-row-display/form-row-display';

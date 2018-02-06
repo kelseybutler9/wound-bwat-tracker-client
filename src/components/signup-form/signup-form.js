@@ -1,6 +1,6 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {required, nonEmpty} from '.../validators';
+import {required, nonEmpty} from '../../validators';
 import FormRowInput from '../form-row-input/form-row-input';
 
 import './signup-form.css'

@@ -6,6 +6,7 @@ import ViewBWATForm from '../view-bwat-form/view-bwat-form';
 import BWATForm from '../bwat-form/bwat-form';
 import LogIn from '../login-form/login-form';
 import SignUp from '../signup-form/signup-form';
+import ClientForm from '../client-form/client-form';
 
 import './app.css';
 
@@ -20,7 +21,8 @@ export default function App(props) {
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={LogIn} />
           <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/new' component={BWATForm} />
+          <Route exact path='/new-form' component={BWATForm} />
+          <Route exact path='/new-client' component={ClientForm} />
           <Route exact path='/forms' component={ViewAllForms} />
           <Route exact path='/view/:id' component={ViewBWATForm} />
         </main>

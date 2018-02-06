@@ -2,7 +2,8 @@ import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import FormCategoryRow from '../form-category-row/form-category-row';
 import FormRowInput from '../form-row-input/form-row-input';
-import {required, nonEmpty} from '.../validators';
+import {required, nonEmpty} from '../../validators';
+import {Link} from 'react-router-dom';
 
 import './client-form.css';
 
@@ -28,6 +29,8 @@ export class ClientForm extends React.Component {
 
   onSubmit (values) {
     console.log(values);
+    const client = document.forms.client;
+
     this.setState({
       firstName: client.firstName.value,
       lastName: client.lastName.value,
@@ -39,7 +42,7 @@ export class ClientForm extends React.Component {
       age: client.age.value,
       weight: client.weight.value,
       feedback: 'Client successfully created',
-      complete,
+      complete: true,
       error: false
     })
   }
@@ -50,7 +53,7 @@ export class ClientForm extends React.Component {
        if (this.props.complete) {
            successMessage = (
              <div>
-               <p>{feedback}</p>
+               <p>{this.feedback}</p>
                <button><Link to={'/new-form'} clientId={this.id}>Create a BWAT Form for {this.firstName}</Link></button>
              </div>
            );
@@ -60,14 +63,14 @@ export class ClientForm extends React.Component {
        if (this.props.error) {
            errorMessage = (
              <div>
-               <p>{feedback}</p>
+               <p>{this.feedback}</p>
              </div>
            );
        }
 
     return (
       <form>
-        <h2>Client</h2>
+        <h2>New Client</h2>
         {errorMessage}
         {successMessage}
         <FormCategoryRow title='Client Name' />
