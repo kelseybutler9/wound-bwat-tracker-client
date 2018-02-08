@@ -26,8 +26,10 @@ export class ClientForm extends React.Component {
       complete: false,
       error: false,
     };
-  }
 
+  this.onChange = this.onChange.bind(this);
+  this.onSubmit = this.onSubmit.bind(this);
+ }
   onSubmit (values) {
     console.log(values);
     const client = document.forms.client;
@@ -48,7 +50,10 @@ export class ClientForm extends React.Component {
     })
   }
 
-  onChange = date => this.setState({ date });
+  onChange(event) {
+    console.log(event.target);
+    //this.setState({startDate: event.target.value});
+  }
 
   render () {
 
@@ -72,7 +77,7 @@ export class ClientForm extends React.Component {
        }
 
     return (
-      <form>
+      <form onSubmit={this.onSubmit} >
         <h2>New Client</h2>
         {errorMessage}
         {successMessage}

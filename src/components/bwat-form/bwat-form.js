@@ -6,26 +6,38 @@ import FormRowDisplay from '../form-row-display/form-row-display';
 import ClientForm from '../client-form/client-form';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
-import './bwat-form.css'
+import './bwat-form.css';
+import DatePicker from 'react-date-picker';
 
 export class BWATForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [{id: '1', firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {clientId: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}]
-
+      clients: [{id: '1', firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {id: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}],
+      clientSelected: false,
+      clientId: '',
+      clientName: '',
+      question_one: {choices: ['Sacrum and Coccyx','Lateral ankle','Trochanter','Medial ankle','Ischial tuberosity','Heel','other'] , values: []},
+      question_two: [{choices: [] , values: []}],
     };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(e) {
+      e.preventDefault();
+      this.setState(
+        {clientId: e.target.value,
+          clientSelected: true,
+          clientName: e.target.text
+        }
+      );
   }
 
   onSubmit (e) {
     e.preventDefault();
         const bwat = document.forms.bwat;
-        // this.props.createBWAT({
-        //   owner: form.owner.value,
-        //   title: form.title.value,
-        //   status: 'New',
-        //   created: new Date(),
-        // });
 
         bwat.date_of_form.value="";
         bwat.wound_location.value="";
@@ -46,9 +58,26 @@ export class BWATForm extends React.Component {
         bwat.score.value="";
   }
 
-  onChange = date => this.setState({ date });
+  onChange = date => this.setState({startDate: date });
 
   render () {
+
+    if(!this.state.clientSelected) {
+      return(
+        <form>
+          <h2>BWAT Wound Form</h2>
+          <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
+            <label>Select an existing client</label>
+            {this.state.clients.map(client => (
+              <option value={client.id} key={client.id} onClick={this.onClick}>
+                {client.firstName} {client.lastName}
+                </option>
+              ))}
+          </Field>
+          <button><Link to={'/new-client'}>Create New Client</Link></button>
+        </form>
+      )
+    }
 
     return (
       <form
@@ -56,26 +85,31 @@ export class BWATForm extends React.Component {
                 this.onSubmit(values)
               )}>
         <h2>BWAT Wound Form</h2>
+        <h3>Client: {this.state.clientName}</h3>
         <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
-          <option>Select an existing client</option>
+          <label>Select an existing client</label>
           {this.state.clients.map(client => (
-            <option value={client.id} key={client.id}>
+            <option value={client.id} key={client.id} onClick={this.onClick}>
               {client.firstName} {client.lastName}
               </option>
             ))}
         </Field>
+        <label>Date of Form</label>
+        <DatePicker
+           name='date_of_form'
+           onChange={this.onChange}
+           value={this.state.date_of_form}
+        />
+        <FormCategoryRow title='Wound Information' />
+        <Field name='wound_location' component='FormRowInput' validate={[required, nonEmpty]}>
+          <label>Where is the wound located? Anatomic site:</label>
+          {this.state.question_one.choices.map(choice => (
+            <option value={choice} onClick={this.onClick}>
+              {choice}
+            </option>
+          ))}
+        </Field>
       </form>
-        // <button><Link to={'/new-client'}>Create New Client</Link></button>
-        // <Field name='client' type='text' label='Select the correct client name' component={FormRowInput} validate={[required, nonEmpty]} choices={this.clients} values={clientIds} />
-        // <ClientForm />
-        // <label>Date of Form</label>
-        // <DatePicker
-        //    name='date_of_form'
-        //    onChange={this.onChange}
-        //    value={this.state.date_of_form}
-        // />
-        // <Field name='date-of-form' type='date' label='Date of Form' component={FormRowInput} validate={[required, nonEmpty]} choices={[]} values={[]} />
-        // <FormCategoryRow title='Wound Information' />
         // <Field
         //   name='wound-location'
         //   type='text'
