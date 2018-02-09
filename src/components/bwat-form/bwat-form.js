@@ -32,7 +32,8 @@ export class BWATForm extends React.Component {
       question_eleven: {choices:['1 = None present','2 = Induration, less than 2 cm around wound','3 = Induration 2-4 cm extending less than 50% around wound','4 = Induration 2-4 cm extending greater than 50% around wound','5 = Induration > 4 cm in any area around wound'], selected: ''},
       question_twelve: {choices: ['1 = Skin intact or partial thickness wound','2 = Bright, beefy red; 75% to 100% of wound filled &/or tissue overgrowth','3 = Bright, beefy red; 75% to 25% of wound filled','4 = Pink, &/or dull, dusky red &/or fills less than 25% of wound','5 = No granulation tissue present'], selected: ''},
       question_thirteen: {choices: [ '1 = 100% wound covered, surface intact','2 = 75% to 100% wound covered &/or epithelial tissue extends >0.5cm into wound bed','3 = 50% to 75% wound covered &/or epithelial tissue extends to  less than 0.5cm into wound bed','4 = 25% to 50% wound covered','5 = less than 25% wound covered'], selected: ''},
-      submitting: false
+      submitting: false,
+      score: 13
     }
 
     this.onChange = this.onChange.bind(this);
@@ -43,7 +44,7 @@ export class BWATForm extends React.Component {
   onClick(e) {
       e.preventDefault();
       this.setState(
-        {clientId: e.target.value,
+        { clientId: e.target.value,
           clientSelected: true,
           clientName: e.target.text
         }
@@ -51,7 +52,13 @@ export class BWATForm extends React.Component {
   }
 
   addSelected(e) {
-    console.log(e.target);
+    console.log(e.target.id)
+    // const key = e.target.id;
+    // const states = this.state;
+    // const items = states.key;
+    // items.selected = e.target.value;
+    // this.setState({items});
+
   }
 
   onSubmit (e) {
@@ -105,14 +112,6 @@ export class BWATForm extends React.Component {
                 )}>
           <h2>BWAT Wound Form</h2>
           <h3>Client: {this.state.clientName}</h3>
-          <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
-            <label>Select an existing client</label>
-            {this.state.clients.map(client => (
-              <option value={client.id} key={client.id} onClick={this.onClick}>
-                {client.firstName} {client.lastName}
-                </option>
-              ))}
-          </Field>
           <label>Date of Form</label>
           <DatePicker
              name='date_of_form'
@@ -122,126 +121,156 @@ export class BWATForm extends React.Component {
           <FormCategoryRow title='Wound Information' />
           <Field name='wound_location' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>Where is the wound located? Anatomic site:</label>
+            <select value={this.state.wound_location.value} id="wound_location" onChange={this.addSelected}>
             {this.state.wound_location.choices.map(choice => (
-              <option value={choice} onClick={this.addSelected}>
+              <option value={choice}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='shape' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>Shape: Overall wound patter; assess by observing perimeter and depth?</label>
+            <select value={this.state.shape.value} id="shape" onChange={this.addSelected}>
             {this.state.shape.choices.map(choice => (
-              <option value={choice} onClick={this.addSelected}>
+              <option value={choice}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <FormCategoryRow title='Questions' />
           <Field name='question_one' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>1. Size</label>
+            <select value={this.state.question_one.value} id="question_one"onChange={this.addSelected}>
             {this.state.question_one.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_two' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>2. Depth</label>
+            <select value={this.state.question_two.value} id="question_two" onChange={this.addSelected}>
             {this.state.question_two.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_three' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>3. Edges</label>
+            <select value={this.state.question_three.value} id="question_three"onChange={this.addSelected}>
             {this.state.question_three.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_four' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>4. Undermining</label>
+            <select value={this.state.question_four.value} id="question_four" onChange={this.addSelected}>
             {this.state.question_four.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_five' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>5. Necrotic Tissue Type</label>
+            <select value={this.state.question_four.value} id="question_five" onChange={this.addSelected}>
             {this.state.question_five.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_six' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>6. Necrotic Tissue Amount</label>
+            <select value={this.state.question_six.value} id="question_six" onChange={this.addSelected}>
             {this.state.question_six.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_seven' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>7. Exudate Type</label>
+            <select value={this.state.question_seven.value} id="question_seven"onChange={this.addSelected}>
             {this.state.question_seven.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_eight' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>8. Exudate Amount</label>
+            <select value={this.state.question_eight.value} id="question_eight" onChange={this.addSelected}>
             {this.state.question_eight.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_nine' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>9. Skin Color Surrounding Wound</label>
+            <select value={this.state.question_nine.value} id="question_nine" onChange={this.addSelected}>
             {this.state.question_nine.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_ten' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>10. Peripheral Tissue Edema</label>
+            <select value={this.state.question_ten.value} id="question_ten" onChange={this.addSelected}>
             {this.state.question_ten.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_eleven' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>11. Peripheral Tissue Induration</label>
+            <select value={this.state.question_eleven.value} id="question_eleven" onChange={this.addSelected}>
             {this.state.question_eleven.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_twelve' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>12. Granulation Tissue</label>
+            <select value={this.state.question_twelve.value} id="question_twelve" onChange={this.addSelected}>
             {this.state.question_twelve.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
           <Field name='question_thirteen' component='FormRowInput' validate={[required, nonEmpty]}>
             <label>13. Epithelialization</label>
+            <select value={this.state.question_thirteen.value} id="question_thirteen" onChange={this.addSelected}>
             {this.state.question_thirteen.choices.map((choice, index) => (
-              <option value={index} onClick={this.addSelected}>
+              <option value={index}>
                 {choice}
               </option>
             ))}
+            </select>
           </Field>
-          <FormRowDisplay title='Weekly Score' value={13} />
+          <FormRowDisplay title='Weekly Score' value={this.state.score} />
           <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create BWAT Form</button>
         </form>
       );
