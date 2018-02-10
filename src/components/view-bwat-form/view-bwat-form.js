@@ -23,38 +23,37 @@ export default function ViewBWATForm (props) {
                           }
 
   const questionValues = [];
-  questionChoices.forEach((key, index) => {
-    let value = props.values[key];
-    questionValues.push(key[value]);
+  Object.keys(questionChoices).forEach((key, index) => {
+    let value = props.values[index];
+    questionValues.push(questionChoices[key][value]);
   });
-
 
   return (
 
     <div class='view-bwat'>
     <TopNav />
-      <h1>{this.props.firstName} {this.props.lastName} BWAT Form - {this.props.week}</h1>
+      <h1>{props.firstName} {props.lastName} BWAT Form - {props.week}</h1>
       <h2>BWAT Wound Form</h2>
 
       <FormCategoryRow title='Wound Information' />
-      <FormRowDisplay className='question' title='Where is the wound located? Anatomic site' answer={this.props.questionValues[0]} />
-      <FormRowDisplay className='question' title='Shape: Overall wound patter; assess by observing perimeter and depth.' answer={this.props.questionValues[1]} />
-      <FormRowDisplay className='question' title='1. Size' answer={this.props.questionValues[2]} />
-      <FormRowDisplay className='question' title='2. Depth' answer={this.props.questionValues[3]} />
-      <FormRowDisplay className='question' title='3. Edges' answer={this.props.questionValues[4]} />
-      <FormRowDisplay className='question' title='4. Undermining' answer={this.props.questionValues[5]} />
-      <FormRowDisplay className='question' title='5. Necrotic Tissue Type' answer={this.props.questionValues[6]} />
-      <FormRowDisplay className='question' title='6. Necrotic Tissue Amount' answer={this.props.questionValues[7]} />
-      <FormRowDisplay className='question' title='7. Exudate Type' answer={this.props.questionValues[8]} />
-      <FormRowDisplay className='question' title='8. Exudate Amount' answer={this.props.questionValues[9]} />
-      <FormRowDisplay className='question' title='9. Skin Color Surrounding Wound' answer={this.props.questionValues[10]} />
-      <FormRowDisplay className='question' title='10. Peripheral Tissue Edema' answer={this.props.questionValues[11]} />
-      <FormRowDisplay className='question' title='11. Peripheral Tissue Induration' answer={this.props.questionValues[12]} />
-      <FormRowDisplay className='question' title='12. Granulation Tissue' answer={this.props.questionValues[13]} />
-      <FormRowDisplay className='question' title='13. Epithelialization' answer={this.props.questionValues[14]} />
+      <FormRowDisplay className='question' title='Where is the wound located? Anatomic site' value={questionValues[0]} />
+      <FormRowDisplay className='question' title='Shape: Overall wound patter; assess by observing perimeter and depth.' value={questionValues[1]} />
+      <FormRowDisplay className='question' title='1. Size' value={questionValues[2]} />
+      <FormRowDisplay className='question' title='2. Depth' value={questionValues[3]} />
+      <FormRowDisplay className='question' title='3. Edges' value={questionValues[4]} />
+      <FormRowDisplay className='question' title='4. Undermining' value={questionValues[5]} />
+      <FormRowDisplay className='question' title='5. Necrotic Tissue Type' value={questionValues[6]} />
+      <FormRowDisplay className='question' title='6. Necrotic Tissue Amount' value={questionValues[7]} />
+      <FormRowDisplay className='question' title='7. Exudate Type' value={questionValues[8]} />
+      <FormRowDisplay className='question' title='8. Exudate Amount' value={questionValues[9]} />
+      <FormRowDisplay className='question' title='9. Skin Color Surrounding Wound' value={questionValues[10]} />
+      <FormRowDisplay className='question' title='10. Peripheral Tissue Edema' value={questionValues[11]} />
+      <FormRowDisplay className='question' title='11. Peripheral Tissue Induration' value={questionValues[12]} />
+      <FormRowDisplay className='question' title='12. Granulation Tissue' value={questionValues[13]} />
+      <FormRowDisplay className='question' title='13. Epithelialization' value={questionValues[14]} />
 
       <FormCategoryRow title='Weekly Score' />
-      <FormRowDisplay className='score' title={this.props.week} answer={this.props.score} />
+      <FormRowDisplay className='score' title={props.week} value={props.score} />
       <button><Link to={'/'}>Home</Link></button>
   </div>
   );

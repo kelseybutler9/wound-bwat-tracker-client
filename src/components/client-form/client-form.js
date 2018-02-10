@@ -5,6 +5,7 @@ import FormRowInput from '../form-row-input/form-row-input';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-date-picker';
+import TopNav from '../top-nav/top-nav';
 
 import './client-form.css';
 
@@ -77,35 +78,38 @@ export class ClientForm extends React.Component {
        }
 
     return (
-      <form onSubmit={this.onSubmit} >
-        <h2>New Client</h2>
-        {errorMessage}
-        {successMessage}
-        <FormCategoryRow title='Client Name' />
-        <Field name='firstName' type='text' label='First Name' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='lastName' type='text' label='Last Name' component={FormRowInput} validate={[required, nonEmpty]} />
-        <FormCategoryRow title='Client Location' />
-        <Field name='hopsitalName' type='text' label='Hospital Name' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='city' type='text' label='City' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='clientState' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
-        <FormCategoryRow title='Time Frame' />
-        <label>Start Date</label>
-        <DatePicker
-           name='startDate'
-           onChange={this.onChange}
-           value={this.state.startDate}
-        />
-        <label>End Date</label>
-        <DatePicker
-          name='endDate'
-          onChange={this.onChange}
-          value={this.state.endDate}
-        />
-        <FormCategoryRow title='Client Information' />
-        <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
-        <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
-        <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create Client</button>
-      </form>
+      <div className="client-form">
+        <TopNav />
+        <form onSubmit={this.onSubmit} >
+          <h2>New Client</h2>
+          {errorMessage}
+          {successMessage}
+          <FormCategoryRow title='Client Name' />
+          <Field name='firstName' type='text' label='First Name' component={FormRowInput} validate={[required, nonEmpty]} />
+          <Field name='lastName' type='text' label='Last Name' component={FormRowInput} validate={[required, nonEmpty]} />
+          <FormCategoryRow title='Client Location' />
+          <Field name='hopsitalName' type='text' label='Hospital Name' component={FormRowInput} validate={[required, nonEmpty]} />
+          <Field name='city' type='text' label='City' component={FormRowInput} validate={[required, nonEmpty]} />
+          <Field name='clientState' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
+          <FormCategoryRow title='Time Frame' />
+          <label>Start Date</label>
+          <DatePicker
+             name='startDate'
+             onChange={this.onChange}
+             value={this.state.startDate}
+          />
+          <label>End Date</label>
+          <DatePicker
+            name='endDate'
+            onChange={this.onChange}
+            value={this.state.endDate}
+          />
+          <FormCategoryRow title='Client Information' />
+          <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
+          <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
+          <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create Client</button>
+        </form>
+      </div>
     );
   }
 }
