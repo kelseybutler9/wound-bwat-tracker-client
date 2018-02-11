@@ -27,12 +27,10 @@ export class ClientForm extends React.Component {
       complete: false,
       error: false,
     };
-
-  this.onChange = this.onChange.bind(this);
+    
   this.onSubmit = this.onSubmit.bind(this);
  }
   onSubmit (values) {
-    console.log(values);
     const client = document.forms.client;
 
     this.setState({
@@ -51,10 +49,8 @@ export class ClientForm extends React.Component {
     })
   }
 
-  onChange(event) {
-    console.log(event.target);
-    //this.setState({startDate: event.target.value});
-  }
+  onStartChange = date => this.setState({startDate: date});
+  onEndChange = date => this.setState({endDate: date});
 
   render () {
 
@@ -95,19 +91,19 @@ export class ClientForm extends React.Component {
           <label>Start Date</label>
           <DatePicker
              name='startDate'
-             onChange={this.onChange}
+             onChange={this.onStartChange}
              value={this.state.startDate}
           />
           <label>End Date</label>
           <DatePicker
             name='endDate'
-            onChange={this.onChange}
+            onChange={this.onEndChange}
             value={this.state.endDate}
           />
           <FormCategoryRow title='Client Information' />
           <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
           <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
-          <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create Client</button>
+          <button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</button>
         </form>
       </div>
     );

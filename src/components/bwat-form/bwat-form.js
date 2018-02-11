@@ -9,12 +9,14 @@ import {Link} from 'react-router-dom';
 import './bwat-form.css';
 import DatePicker from 'react-date-picker';
 import TopNav from '../top-nav/top-nav';
+import connect from 'react-redux';
+import {fetchClients} from '../../actions';
 
 export class BWATForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [{id: '1', firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {id: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}],
+      clients: [{id: '1', firstName: 'kelsey', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 19, weight: 145}, {id: 2, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '10/13/2018', endDate: '12/14/2019', age: 32, weight: 150}],
       clientSelected: false,
       clientId: '',
       clientName: '',
@@ -40,6 +42,10 @@ export class BWATForm extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
+  }
+
+  componentDidMount() {
+        this.props.dispatch(fetchClients());
   }
 
   onClick(e) {
