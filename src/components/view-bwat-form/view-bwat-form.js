@@ -30,7 +30,7 @@ export default function ViewBWATForm (props) {
 
   return (
 
-    <div class='view-bwat'>
+    <div className='view-bwat'>
     <TopNav />
       <h1>{props.firstName} {props.lastName} BWAT Form - {props.week}</h1>
       <h2>BWAT Wound Form</h2>
@@ -62,7 +62,7 @@ export default function ViewBWATForm (props) {
 ViewBWATForm.defaultProps = {
   firstName: '',
   lastName: '',
-  week: 10/20/1992,
+  week: 10-20-1992,
   values: [1,2,3,3,2,3,4,3,4,2,1,2,0],
   score: 13
 };

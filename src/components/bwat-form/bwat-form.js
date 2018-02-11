@@ -20,6 +20,7 @@ export class BWATForm extends React.Component {
       clientSelected: false,
       clientId: '',
       clientName: '',
+      date_of_form: '',
       wound_location: {choices: ['Sacrum and Coccyx','Lateral ankle','Trochanter','Medial ankle','Ischial tuberosity','Heel','other'], selected: ''},
       shape: {choices: ['Irregular','Linear or elongated','Round/Oval','Bowl/boat','Square/rectangle','Butterfly','Other Shape'], selected: ''},
       question_one: {choices:['1 = Length x width less than 4 sq cm','2 = Length x width 4-16 sq cm', '3 = Length x width 16.1--36 sq cml','4 = Length x width 36.1--80 sq cm','5 = Length x width greater than 80 sq cm'], selected: ''},
@@ -39,14 +40,16 @@ export class BWATForm extends React.Component {
       score: 13
     }
 
-    this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
   }
 
   componentDidMount() {
-        this.props.dispatch(fetchClients());
+    const clientsObj = this.props.dispatch(fetchClients());
+    this.setState({clients: clientsObj});
   }
+
+  onDateChange = date => this.setState({date_of_form: date});
 
   onClick(e) {
       e.preventDefault();
@@ -127,7 +130,7 @@ export class BWATForm extends React.Component {
             <label>Date of Form</label>
             <DatePicker
                name='date_of_form'
-               onChange={this.onChange}
+               onChange={this.onDateChange}
                value={this.state.date_of_form}
             />
             <FormCategoryRow title='Wound Information' />
@@ -283,7 +286,7 @@ export class BWATForm extends React.Component {
               </select>
             </Field>
             <FormRowDisplay title='Weekly Score' value={this.state.score} />
-            <button type='submit' diabled={this.props.pristine || this.props.submitting}>Create BWAT Form</button>
+            <button type='submit' disabled={this.props.pristine || this.props.submitting}>Create BWAT Form</button>
           </form>
         </div>
       );
