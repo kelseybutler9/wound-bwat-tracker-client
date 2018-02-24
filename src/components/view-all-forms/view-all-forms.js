@@ -25,6 +25,7 @@ export class ViewAllForms extends React.Component {
 
   componentDidMount() {
     const clientsObj = this.props.dispatch(fetchClients());
+    console.log(clientsObj);
     //this.setState({clients: clientsObj});
   }
 
@@ -49,10 +50,10 @@ export class ViewAllForms extends React.Component {
     // this.setState({forms: updatedForms});
 
   render () {
-    const clientChoices = [];
-    this.state.clients.forEach(client =>
-        clientChoices.push(`${client.firstName} ${client.lastName}`)
-    )
+    const clientChoices = ["Kelsey Butler"];;
+    // this.state.clients.forEach(client =>
+    //     clientChoices.push(`${client.firstName} ${client.lastName}`)
+    // )
 
     const BWATForms = this.state.forms.map((formId, index) =>
         <BWATPreview id={formId.id} score={formId.score} week={formId.week} clientId={formId.clientId}/>

@@ -1,16 +1,19 @@
-import {GENERATE_SCORE} from './actions';
+import * as actions from './actions';
 
 const initialState = {
   score: ''
 }
 
 export const appReducer = (state = initialState, action) => {
-  if(action.type === GENERATE_SCORE) {
+  if(action.type === actions.GENERATE_SCORE) {
     console.log(state);
     let updatedScore = 30;
     return Object.assign({}, state, {
       score: updatedScore
     });
   }
-  return state;
+  else if (action.type === actions.FETCH_ITEM_SUCCESS) {
+       return action.clients;
+   }
+   return state;
 };

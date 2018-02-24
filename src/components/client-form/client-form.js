@@ -27,7 +27,7 @@ export class ClientForm extends React.Component {
       complete: false,
       error: false,
     };
-    
+
   this.onSubmit = this.onSubmit.bind(this);
  }
   onSubmit (values) {

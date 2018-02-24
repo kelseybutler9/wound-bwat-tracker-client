@@ -7,6 +7,11 @@ export const generateScore = score => ({
   score
 });
 
+export const FETCH_ITEM_SUCCESS = 'FETCH_ITEM_SUCCESS';
+export const fetchitemsuccess = clients => ({
+  type: FETCH_ITEM_SUCCESS,
+  clients
+});
 
 export const fetchClients = () => dispatch => {
   fetch(`${API_BASE_URL}/clients`)
@@ -17,7 +22,7 @@ export const fetchClients = () => dispatch => {
       return res.json();
     })
     .then(clients => {
-      dispatch(console.log('success'));
+      dispatch(fetchitemsuccess(clients));
     });
 };
 
@@ -30,11 +35,12 @@ export const fetchForms = () => dispatch => {
       return res.json();
     })
     .then(forms => {
-      dispatch(console.log('success'));
+      dispatch(fetchitemsuccess(forms));
     })
 };
 
 export const fetchForm = (id) => dispatch => {
+  console.log(API_BASE_URL);
   fetch(`${API_BASE_URL}/forms/${id}`)
     .then(res => {
       if(!res.ok) {
@@ -43,7 +49,7 @@ export const fetchForm = (id) => dispatch => {
       return res.json();
     })
     .then(form => {
-      dispatch(console.log('success'));
+      dispatch(fetchitemsuccess(form));
     })
 };
 
@@ -56,6 +62,6 @@ export const fetchClient = (id) =>  dispatch => {
       return res.json();
     })
     .then(client => {
-      dispatch(console.log('success'));
+      dispatch(fetchitemsuccess(client));
     })
 };
