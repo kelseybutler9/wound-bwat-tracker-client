@@ -2,9 +2,9 @@
 import {API_BASE_URL} from './config.js';
 
 export const GENERATE_SCORE = 'GENERATE_SCORE';
-export const generateScore = score => ({
+export const generateScore = scores => ({
   type: GENERATE_SCORE,
-  score
+  scores
 });
 
 export const FETCH_ITEM_SUCCESS = 'FETCH_ITEM_SUCCESS';

@@ -1,7 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import FormCategoryRow from '../form-category-row/form-category-row';
-import FormRowInput from '../form-row-input/form-row-input';
 import FormRowDisplay from '../form-row-display/form-row-display';
 import ClientForm from '../client-form/client-form';
 import {required, nonEmpty} from '../../validators';
@@ -10,7 +9,7 @@ import './bwat-form.css';
 import DatePicker from 'react-date-picker';
 import TopNav from '../top-nav/top-nav';
 import connect from 'react-redux';
-import {fetchClients} from '../../actions';
+import {fetchClients, generateScore} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 
@@ -67,18 +66,15 @@ export class BWATForm extends React.Component {
     }
 
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
     //this.props.dispatch(fetchClients());
-    //console.log(clientsObj);
-    // this.setState({clients: clientsObj});
     const self = this;
     axios.get(`${API_BASE_URL}/clients`)
     .then(function (response) {
       self.setState({clients: response.data});
-      console.log(self.state.clients);
     })
     .catch(function (error) {
       console.log(error);
@@ -86,96 +82,57 @@ export class BWATForm extends React.Component {
   }
 
   onDateChange = date => this.setState({date_of_form: date});
-  // onLocationChange = location => this.setState({wound_location: location});
-  // onShapeChange = shape => this.setState({shape: shape});
-  // onOneChange = one => this.setState({question_one: one});
-  // onTwoChange = two => this.setState({question_two: two});
-  // onThreeChange = three => this.setState({question_three: three});
-  // onFourChange = four => this.setState({question_four: four});
-  // onFiveChange = five => this.setState({question_five: five});
-  // onSixChange = six => this.setState({question_six: six});
-  // onSevenChange = seven => this.setState({question_seven: seven});
-  // onEightChange = eight => this.setState({question_eight: eight});
-  // onNineChange = nine => this.setState({question_nine: nine});
-  // onTenChange = ten => this.setState({question_ten: ten});
-  // onElevenChange = eleven => this.setState({question_eleven: eleven});
-  // onTwelveChange = twelve => this.setState({question_twelve: twelve});
-  // onThirteenChange = thirteen => this.setState({question_thirteen: thirteen});
 
-  onClick(e) {
+  onChange(e) {
       e.preventDefault();
+      const name = e.target.value;
+      const nameId = name.split("-");
       this.setState(
-        { clientId: e.target.value,
+        { clientId: nameId[1],
           clientSelected: true,
-          clientName: e.target.text
+          clientName:nameId[0]
         }
       );
   }
 
-  // addSelected(e) {
-  //   console.log(e.target.id)
-  //   // const key = e.target.id;
-  //   // const states = this.state;
-  //   // const items = states.key;
-  //   // items.selected = e.target.value;
-  //   // this.setState({items});
-  //
-  // }
+  onSubmit(e) {
 
-  onSubmit (e) {
-    e.preventDefault();
+    console.log(e);
+    console.log(this.state.clientId);
 
 
-    axios({
-      method: 'post',
-      url: `${API_BASE_URL}/forms`,
-      data: {
-        client_id: this.clientId,
-        date_of_form: this.state.date_of_form,
-        wound_location: this.state.wound_location,
-        shape_of_wound: this.state.shape,
-        question_one: this.state.question_one,
-        question_two: this.state.question_two,
-        question_three: this.state.question_three,
-        question_four: this.state.question_four,
-        question_five: this.state.question_four,
-        question_six: this.state.question_six,
-        question_seven: this.state.question_seven,
-        question_eight: this.state.question_eight,
-        question_nine: this.state.question_nine,
-        question_ten: this.state.question_ten,
-        question_eleven: this.state.question_eleven,
-        question_twelve: this.state.question_twelve,
-        question_thirteen: this.state.question_thirteen,
-        score: this.state.score
-      }
-    });
-
-    this.setState({submitting: true});
-
-        //const bwat = document.forms.bwat;
-
-        //bwat.date_of_form.value="";
-        // bwat.wound_location.value="";
-        // bwat.client_id.value = "";
-        // bwat.question_one.value = "";
-        // bwat.question_two.value="";
-        // bwat.question_three.value = "";
-        // bwat.question_four.value = "";
-        // bwat.question_five.value="";
-        // bwat.question_six.value = "";
-        // bwat.question_seven.value="";
-        // bwat.question_eight.value = "";
-        // bwat.question_nine.value = "";
-        // bwat.question_ten.value="";
-        // bwat.question_eleven.value = "";
-        // bwat.question_twelve.value = "";
-        // bwat.question_thirteen.value="";
-        // bwat.score.value="";
+    // axios({
+    //   method: 'post',
+    //   url: `${API_BASE_URL}/forms`,
+    //   data: {
+    //     client_id: this.state.clientId,
+    //     date_of_form: this.date_of_form.value,
+    //     wound_location: this.wound_location.value,
+    //     shape_of_wound: this.state.shape,
+    //     question_one: this.state.question_one,
+    //     question_two: this.state.question_two,
+    //     question_three: this.state.question_three,
+    //     question_four: this.state.question_four,
+    //     question_five: this.state.question_four,
+    //     question_six: this.state.question_six,
+    //     question_seven: this.state.question_seven,
+    //     question_eight: this.state.question_eight,
+    //     question_nine: this.state.question_nine,
+    //     question_ten: this.state.question_ten,
+    //     question_eleven: this.state.question_eleven,
+    //     question_twelve: this.state.question_twelve,
+    //     question_thirteen: this.state.question_thirteen,
+    //     score: this.state.score
+    //   }
+    // });
+    //
+    // this.setState({submitting: true});
+    // console.log(this.question_one.key);
+    this.props.dispatch(generateScore([1,2]));
+    console.log(this.state.score);
 
   }
 
-  //onChange = date => this.setState({startDate: date });
 
   render () {
 
@@ -185,12 +142,12 @@ export class BWATForm extends React.Component {
           <TopNav />
           <form>
             <h2>BWAT Wound Form</h2>
-            <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>Select an existing client</label>
+            <label>Select an existing client</label>
+            <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
               {this.state.clients.map(client => (
-                <option value={client.id} key={client.id} onClick={this.onClick}>
+                <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
                   {client.first_name} {client.last_name}
-                  </option>
+                </option>
                 ))}
             </Field>
             <button><Link to={'/new-client'}>Create New Client</Link></button>
@@ -217,159 +174,143 @@ export class BWATForm extends React.Component {
                value={this.state.date_of_form}
             />
             <FormCategoryRow title='Wound Information' />
-            <Field name='wound_location' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>Where is the wound located? Anatomic site:</label>
-              <select value={this.state.wound_location.value} id="wound_location">
+            <label>Where is the wound located? Anatomic site:</label>
+            <Field name='wound_location' component='select' validate={[required, nonEmpty]}>
+
               {this.state.wound_location.map(choice => (
-                <option value={choice}>
+                <option key={choice}>
                   {choice}
                 </option>
               ))}
-              </select>
             </Field>
-            <Field name='shape' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>Shape: Overall wound patter; assess by observing perimeter and depth?</label>
-              <select value={this.state.shape.value} id="shape">
+            <label>Shape: Overall wound patter; assess by observing perimeter and depth?</label>
+            <Field name='shape' component='select' validate={[required, nonEmpty]}>
+
               {this.state.shape.map(choice => (
-                <option value={choice}>
+                <option key={choice}>
                   {choice}
                 </option>
               ))}
-              </select>
             </Field>
             <FormCategoryRow title='Questions' />
-            <Field name='question_one' component='FormRowInput' validate={[required, nonEmpty]}>
               <label>1. Size</label>
-              <select value={this.state.question_one.value} id="question_one">
-              {this.state.question_one.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_two' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>2. Depth</label>
-              <select value={this.state.question_two.value} id="question_two">
-              {this.state.question_two.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_three' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>3. Edges</label>
-              <select value={this.state.question_three.value} id="question_three">
-              {this.state.question_three.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_four' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>4. Undermining</label>
-              <select value={this.state.question_four.value} id="question_four">
-              {this.state.question_four.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_five' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>5. Necrotic Tissue Type</label>
-              <select value={this.state.question_four.value} id="question_five">
-              {this.state.question_five.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_six' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>6. Necrotic Tissue Amount</label>
-              <select value={this.state.question_six.value} id="question_six">
-              {this.state.question_six.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_seven' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>7. Exudate Type</label>
-              <select value={this.state.question_seven.value} id="question_seven">
-              {this.state.question_seven.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_eight' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>8. Exudate Amount</label>
-              <select value={this.state.question_eight.value} id="question_eight">
-              {this.state.question_eight.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_nine' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>9. Skin Color Surrounding Wound</label>
-              <select value={this.state.question_nine.value} id="question_nine">
-              {this.state.question_nine.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_ten' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>10. Peripheral Tissue Edema</label>
-              <select value={this.state.question_ten.value} id="question_ten">
-              {this.state.question_ten.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_eleven' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>11. Peripheral Tissue Induration</label>
-              <select value={this.state.question_eleven.value} id="question_eleven">
-              {this.state.question_eleven.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_twelve' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>12. Granulation Tissue</label>
-              <select value={this.state.question_twelve.value} id="question_twelve">
-              {this.state.question_twelve.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
-            <Field name='question_thirteen' component='FormRowInput' validate={[required, nonEmpty]}>
-              <label>13. Epithelialization</label>
-              <select value={this.state.question_thirteen.value} id="question_thirteen">
-              {this.state.question_thirteen.map((choice, index) => (
-                <option value={index}>
-                  {choice}
-                </option>
-              ))}
-              </select>
-            </Field>
+            <Field name='question_one' component='select' validate={[required, nonEmpty]}>
 
-            <button type='submit' disabled={this.props.pristine || this.props.submitting} onClick={this.onSubmit}>Create BWAT Form</button>
+              {this.state.question_one.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>2. Depth</label>
+            <Field name='question_two' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_two.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>3. Edges</label>
+            <Field name='question_three' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_three.map((choice, index) => (
+                <option key={index} value={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>4. Undermining</label>
+            <Field name='question_four' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_four.map((choice, index) => (
+                <option key={index} value={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>5. Necrotic Tissue Type</label>
+            <Field name='question_five' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_five.map((choice, index) => (
+                <option key={index} value={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>6. Necrotic Tissue Amount</label>
+            <Field name='question_six' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_six.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>7. Exudate Type</label>
+            <Field name='question_seven' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_seven.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>8. Exudate Amount</label>
+            <Field name='question_eight' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_eight.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>9. Skin Color Surrounding Wound</label>
+            <Field name='question_nine' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_nine.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>10. Peripheral Tissue Edema</label>
+            <Field name='question_ten' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_ten.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>11. Peripheral Tissue Induration</label>
+            <Field name='question_eleven' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_eleven.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>12. Granulation Tissue</label>
+            <Field name='question_twelve' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_twelve.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <label>13. Epithelialization</label>
+            <Field name='question_thirteen' component='select' validate={[required, nonEmpty]}>
+
+              {this.state.question_thirteen.map((choice, index) => (
+                <option key={index} value={index}>
+                  {choice}
+                </option>
+              ))}
+            </Field>
+            <button type='submit' disabled={this.props.pristine || this.props.submitting}>Create BWAT Form</button>
           </form>
         </div>
       );

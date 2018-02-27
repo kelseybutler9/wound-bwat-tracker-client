@@ -16,7 +16,8 @@ export default class FormRowInput extends React.Component {
   }
 
   render () {
-    const Element = this.props.element || 'input';
+    // const Element = this.props.element || 'input';
+    const Element = 'select';
     const ElementComponent =
         <Element
           {...this.props.input}
