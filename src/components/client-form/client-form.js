@@ -83,12 +83,17 @@ export class ClientForm extends React.Component {
           {errorMessage}
           {successMessage}
           <FormCategoryRow title='Client Name' />
-          <Field name='firstName' type='text' label='First Name' component={FormRowInput} validate={[required, nonEmpty]} />
-          <Field name='lastName' type='text' label='Last Name' component={FormRowInput} validate={[required, nonEmpty]} />
+          <label>First Name</label>
+          <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
+          <label>Last Name</label>
+          <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
           <FormCategoryRow title='Client Location' />
-          <Field name='hopsitalName' type='text' label='Hospital Name' component={FormRowInput} validate={[required, nonEmpty]} />
-          <Field name='city' type='text' label='City' component={FormRowInput} validate={[required, nonEmpty]} />
-          <Field name='clientState' type='text' label='State' component={FormRowInput} validate={[required, nonEmpty]} />
+          <label>Hospital Name</label>
+          <Field name='hopsitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
+          <label>City</label>
+          <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
+          <label>State</label>
+          <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
           <FormCategoryRow title='Time Frame' />
           <label>Start Date</label>
           <DatePicker
@@ -103,8 +108,10 @@ export class ClientForm extends React.Component {
             value={this.state.endDate}
           />
           <FormCategoryRow title='Client Information' />
-          <Field name='age' type='text' label='Age' component={FormRowInput} validate={[required, nonEmpty]} />
-          <Field name='weight' type='text' label='Weight' component={FormRowInput} validate={[required, nonEmpty]} />
+          <label>Age</label>
+          <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
+          <label>Weight</label>
+          <Field name='weight' type='text' label='Weight' component= 'input' validate={[required, nonEmpty]} />
           <button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</button>
         </form>
       </div>

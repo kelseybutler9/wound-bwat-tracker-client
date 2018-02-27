@@ -8,6 +8,8 @@ import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../../validators';
 import connect from 'react-redux';
 import {fetchClients, fetchClient, fetchForms} from '../../actions';
+import {API_BASE_URL} from '../../config.js';
+import axios from 'axios';
 
 import './view-all-forms.css'
 
@@ -18,29 +20,55 @@ export class ViewAllForms extends React.Component {
       clients: [{id: 1, clientId: 1, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '2017-06-08T19:30:39+00:00', endDate: '2017-06-08T19:30:39+00:00', age: 19, weight: 145}],
       forms: [{id: 12, clientId: 1, week: '2017-06-08T19:30:39+00:00', score: 12}, {id: 13, clientId: 2, week: '2017-06-08T19:30:39+00:00', score: 14}],
       clientSelected: false,
+      clientId: '',
       client: {id: 1, clientId: 1, firstName: 'kelsey', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '2017-06-08T19:30:39+00:00', endDate: '2017-06-08T19:30:39+00:00', age: 19, weight: 145}
     };
-    this.onClientClick = this.onClientClick.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
-    const clientsObj = this.props.dispatch(fetchClients());
-    console.log(clientsObj);
+    const self = this;
+    if(self.state.clientSelected) {
+      console.log(this.state.clientId);
+      axios.get(`${API_BASE_URL}/clients/:${self.state.clientId}`)
+      .then(function (response) {
+        self.setState({client: response.data});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get(`${API_BASE_URL}/forms`)
+      .then(function (response) {
+        self.setState({forms: response.data});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    else {
+      axios.get(`${API_BASE_URL}/clients`)
+      .then(function (response) {
+        self.setState({clients: response.data});
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
     //this.setState({clients: clientsObj});
   }
 
-  onClientClick(e) {
+  onChange(e) {
       e.preventDefault();
-      this.setState({clientSelected: true})
-      // const clientProps = this.props.dispatch(fetchClient(e.target.value));
-      // const clientForms = this.props.dispatch(fetchForms(e.target.value));
-      // this.setState(
-      //   { clientSelected: true,
-      //     client: clientProps,
-      //     forms: clientForms
-      //   }
-      // );
+      const name = e.target.value;
+      const nameId = name.split("-");
+      this.setState(
+        { clientId: nameId[1],
+          clientSelected: true
+        }
+      );
   }
+
 
     // let updatedForms = this.state.forms.map((formId, index) => {
     //   let updatedForm = formId;
@@ -56,19 +84,19 @@ export class ViewAllForms extends React.Component {
     // )
 
     const BWATForms = this.state.forms.map((formId, index) =>
-        <BWATPreview id={formId.id} score={formId.score} week={formId.week} clientId={formId.clientId}/>
+        <BWATPreview id={formId.id} score={formId.score} week={formId.week} clientId={formId.clientId} key={formId.id}/>
       );
 
     if(!this.state.clientSelected) {
       return (
         <div>
         <TopNav />
-        <Field name='client-type' component='FormRowInput' validate={[required, nonEmpty]}>
-          <label>Select a Client</label>
+        <label>Select a Client</label>
+        <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
           {this.state.clients.map(client => (
-            <option value={client.id} key={client.id} onClick={this.onClientClick}>
-              {client.firstName} {client.lastName}
-              </option>
+            <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
+              {client.first_name} {client.last_name}
+            </option>
             ))}
         </Field>
         </div>
@@ -76,9 +104,9 @@ export class ViewAllForms extends React.Component {
     }
 
     return (
-      <div>
+      <div className='client'>
       <TopNav />
-        <div class='view-client'>
+        <div className='view-client'>
           <h2>Client</h2>
           <FormCategoryRow title='Client Name' />
           <FormRowDisplay className='client' title='First Name' value={this.state.client.firstName} />
