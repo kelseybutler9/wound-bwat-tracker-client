@@ -70,7 +70,6 @@ export class BWATForm extends React.Component {
   }
 
   componentDidMount() {
-    //this.props.dispatch(fetchClients());
     const self = this;
     axios.get(`${API_BASE_URL}/clients`)
     .then(function (response) {
@@ -96,40 +95,41 @@ export class BWATForm extends React.Component {
   }
 
   onSubmit(e) {
-
-    console.log(e);
-    console.log(this.state.clientId);
-
+    const scores = [];
+    Object.keys(e).forEach(function(key) {
+      if(key.includes('question')) {
+      scores.push(e[key]);
+    }
+    });
+    this.props.dispatch(generateScore(scores));
+    console.log(this.state.score);
 
     // axios({
     //   method: 'post',
     //   url: `${API_BASE_URL}/forms`,
     //   data: {
     //     client_id: this.state.clientId,
-    //     date_of_form: this.date_of_form.value,
-    //     wound_location: this.wound_location.value,
-    //     shape_of_wound: this.state.shape,
-    //     question_one: this.state.question_one,
-    //     question_two: this.state.question_two,
-    //     question_three: this.state.question_three,
-    //     question_four: this.state.question_four,
-    //     question_five: this.state.question_four,
-    //     question_six: this.state.question_six,
-    //     question_seven: this.state.question_seven,
-    //     question_eight: this.state.question_eight,
-    //     question_nine: this.state.question_nine,
-    //     question_ten: this.state.question_ten,
-    //     question_eleven: this.state.question_eleven,
-    //     question_twelve: this.state.question_twelve,
-    //     question_thirteen: this.state.question_thirteen,
+    //     date_of_form: e[`date_of_form`],
+    //     wound_location: e[`wound_location`],
+    //     shape_of_wound: e[`shape`],
+    //     question_one: e[`question_one`],
+    //     question_two: e[`question_two`],
+    //     question_three: e[`question_three`],
+    //     question_four: e[`question_four`],
+    //     question_five: e[`question_five`],
+    //     question_six: e[`question_six`],
+    //     question_seven: e[`question_seven`],
+    //     question_eight: e[`question_eight`],
+    //     question_nine: e[`question_nine`],
+    //     question_ten: e[`question_ten`],
+    //     question_eleven: e[`question_eleven`],
+    //     question_twelve: e[`question_twelve`],
+    //     question_thirteen: e[`question_thirteen`],
     //     score: this.state.score
     //   }
     // });
     //
     // this.setState({submitting: true});
-    // console.log(this.question_one.key);
-    this.props.dispatch(generateScore([1,2]));
-    console.log(this.state.score);
 
   }
 
