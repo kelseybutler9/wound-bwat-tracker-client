@@ -17,31 +17,7 @@ export class BWATForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [
-        {
-          id: '1',
-          firstName: 'kelsey',
-          lastName: 'last',
-          hospitalName: 'Matilda',
-          city: 'LA',
-          clientState: 'CA',
-          startDate: '10/13/2018',
-          endDate: '12/14/2019',
-          age: 19,
-          weight: 145
-        },
-        {
-          id: 2,
-          firstName: 'first',
-          lastName: 'last',
-          hospitalName: 'Matilda',
-          city: 'LA',
-          clientState: 'CA',
-          startDate: '10/13/2018',
-          endDate: '12/14/2019',
-          age: 32,
-          weight: 150
-        }],
+      clients: [],
       clientSelected: false,
       clientName: '',
       clientId: '',
@@ -63,6 +39,7 @@ export class BWATForm extends React.Component {
       question_thirteen: ['1 = 100% wound covered, surface intact','2 = 75% to 100% wound covered &/or epithelial tissue extends >0.5cm into wound bed','3 = 50% to 75% wound covered &/or epithelial tissue extends to  less than 0.5cm into wound bed','4 = 25% to 50% wound covered','5 = less than 25% wound covered'],
       score: 13,
       submitting: false,
+      feedback: ''
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -127,9 +104,14 @@ export class BWATForm extends React.Component {
     //     question_thirteen: e[`question_thirteen`],
     //     score: this.state.score
     //   }
-    // });
-    //
-    // this.setState({submitting: true});
+    // }).then(function (response) {
+      //   this.setState({
+      //   submitting: true
+      // })
+      // })
+  // .catch(function (error) {
+  //  console.log(error);
+  // })
 
   }
 

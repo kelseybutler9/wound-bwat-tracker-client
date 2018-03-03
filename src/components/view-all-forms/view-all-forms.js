@@ -17,36 +17,38 @@ export class ViewAllForms extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      clients: [{id: 1, clientId: 1, firstName: 'first', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '2017-06-08T19:30:39+00:00', endDate: '2017-06-08T19:30:39+00:00', age: 19, weight: 145}],
-      forms: [{id: 12, clientId: 1, week: '2017-06-08T19:30:39+00:00', score: 12}, {id: 13, clientId: 2, week: '2017-06-08T19:30:39+00:00', score: 14}],
+      clients: [],
+      forms: [{
+id: "5a651e229293b078f2665da3",
+client_id: "321",
+date_of_form: "2017-06-08T19:30:39.000Z",
+wound_location: "Heel",
+shape_of_wound: "Irregular",
+question_one: 1,
+question_two: 2,
+question_three: 0,
+question_four: 4,
+question_five: 1,
+question_six: 0,
+question_seven: 1,
+question_eight: 2,
+question_nine: 3,
+question_ten: 3,
+question_eleven: 0,
+question_twelve: 0,
+question_thirteen: 3,
+score: 30
+}],
       clientSelected: false,
       clientId: '',
-      client: {id: 1, clientId: 1, firstName: 'kelsey', lastName: 'last', hospitalName: 'Matilda', city: 'LA', clientState: 'CA', startDate: '2017-06-08T19:30:39+00:00', endDate: '2017-06-08T19:30:39+00:00', age: 19, weight: 145}
+      client: {}
     };
     this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
     const self = this;
-    if(self.state.clientSelected) {
-      console.log(this.state.clientId);
-      axios.get(`${API_BASE_URL}/clients/:${self.state.clientId}`)
-      .then(function (response) {
-        self.setState({client: response.data});
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-      axios.get(`${API_BASE_URL}/forms`)
-      .then(function (response) {
-        self.setState({forms: response.data});
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-    else {
+    if(!self.state.clientSelected) {
       axios.get(`${API_BASE_URL}/clients`)
       .then(function (response) {
         self.setState({clients: response.data});
@@ -55,33 +57,44 @@ export class ViewAllForms extends React.Component {
         console.log(error);
       });
     }
-    //this.setState({clients: clientsObj});
   }
 
   onChange(e) {
+    const self = this;
       e.preventDefault();
       const name = e.target.value;
       const nameId = name.split("-");
-      this.setState(
-        { clientId: nameId[1],
-          clientSelected: true
-        }
-      );
+      const newId = nameId[1];
+
+      axios.get(`${API_BASE_URL}/clients/:${newId}`)
+      .then(function (response) {
+        self.setState({client: response.data});
+        console.log(self.state.client);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      axios.get(`${API_BASE_URL}/forms`)
+      .then(function (response) {
+        const formsArray = [];
+        response.data.forEach(function(form){
+          formsArray.push(form);
+          // if(form['clientId']===`${newId}`){
+          //   formsArray.push(form);
+          // }
+        });
+        self.setState({forms: formsArray});
+        console.log(self.state.forms);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+      self.setState({ clientSelected: true});
   }
 
-
-    // let updatedForms = this.state.forms.map((formId, index) => {
-    //   let updatedForm = formId;
-    //   updatedForm.week = updatedForm.week.subString(0,9);
-    // });
-    //
-    // this.setState({forms: updatedForms});
-
   render () {
-    const clientChoices = ["Kelsey Butler"];;
-    // this.state.clients.forEach(client =>
-    //     clientChoices.push(`${client.firstName} ${client.lastName}`)
-    // )
 
     const BWATForms = this.state.forms.map((formId, index) =>
         <BWATPreview id={formId.id} score={formId.score} week={formId.week} clientId={formId.clientId} key={formId.id}/>
@@ -126,7 +139,7 @@ export class ViewAllForms extends React.Component {
           <FormRowDisplay className='client' title='Weight' value={this.state.client.weight} />
         </div>
 
-      <div class="view-forms">
+      <div className="view-forms">
         {BWATForms}
       </div>
     </div>

@@ -32,19 +32,39 @@ export class ClientForm extends React.Component {
 
   this.onSubmit = this.onSubmit.bind(this);
  }
-  onSubmit (values) {
-    const client = document.forms.client;
+
+  onSubmit (e) {
+
+    //axios({
+    //   method: 'post',
+    //   url: `${API_BASE_URL}/clients`,
+    //   data: {
+        // firstName: e[`firstName`],
+        // lastName: '',
+        // hospitalName: '',
+        // city: '',
+        // clientState: '',
+        // startDate: new Date(),
+        // endDate: new Date(),
+        // age: '',
+        // weight: ''
+    //   }
+    // }).then(function (response) {
+  //   this.setState({
+  //   feedback: 'Client successfully created',
+  //   complete: true,
+  //   error: false
+  // })
+  // })
+  // .catch(function (error) {
+  //   this.setState({
+  //   feedback: error,
+  //   complete: false,
+  //   error: true
+  // })
+  // });
 
     this.setState({
-      firstName: client.firstName.value,
-      lastName: client.lastName.value,
-      hospitalName: client.hospitalName.value,
-      city: client.city.value,
-      clientState: client.clientState.value,
-      startDate: client.startDate.value,
-      endDate: client.endDate.value,
-      age: client.age.value,
-      weight: client.weight.value,
       feedback: 'Client successfully created',
       complete: true,
       error: false
