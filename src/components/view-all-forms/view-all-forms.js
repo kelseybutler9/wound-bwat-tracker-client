@@ -18,27 +18,7 @@ export class ViewAllForms extends React.Component {
     super(props);
     this.state = {
       clients: [],
-      forms: [{
-id: "5a651e229293b078f2665da3",
-client_id: "321",
-date_of_form: "2017-06-08T19:30:39.000Z",
-wound_location: "Heel",
-shape_of_wound: "Irregular",
-question_one: 1,
-question_two: 2,
-question_three: 0,
-question_four: 4,
-question_five: 1,
-question_six: 0,
-question_seven: 1,
-question_eight: 2,
-question_nine: 3,
-question_ten: 3,
-question_eleven: 0,
-question_twelve: 0,
-question_thirteen: 3,
-score: 30
-}],
+      forms: [],
       clientSelected: false,
       clientId: '',
       client: {}
@@ -60,13 +40,12 @@ score: 30
   }
 
   onChange(e) {
-    const self = this;
-      e.preventDefault();
+      const self = this;
       const name = e.target.value;
       const nameId = name.split("-");
       const newId = nameId[1];
 
-      axios.get(`${API_BASE_URL}/clients/:${newId}`)
+      axios.get(`${API_BASE_URL}/clients/${newId}`)
       .then(function (response) {
         self.setState({client: response.data});
         console.log(self.state.client);
@@ -80,7 +59,7 @@ score: 30
         const formsArray = [];
         response.data.forEach(function(form){
           formsArray.push(form);
-          // if(form['clientId']===`${newId}`){
+          // if(form['client_id']===`${newId}`){
           //   formsArray.push(form);
           // }
         });
@@ -97,7 +76,7 @@ score: 30
   render () {
 
     const BWATForms = this.state.forms.map((formId, index) =>
-        <BWATPreview id={formId.id} score={formId.score} week={formId.week} clientId={formId.clientId} key={formId.id}/>
+        <BWATPreview id={formId.id} score={formId.score} week={formId.date_of_form} clientId={formId.client_id} key={formId.id}/>
       );
 
     if(!this.state.clientSelected) {
@@ -122,13 +101,13 @@ score: 30
         <div className='view-client'>
           <h2>Client</h2>
           <FormCategoryRow title='Client Name' />
-          <FormRowDisplay className='client' title='First Name' value={this.state.client.firstName} />
-          <FormRowDisplay className='client' title='Last Name' value={this.state.client.lastName} />
+          <FormRowDisplay className='client' title='First Name' value={this.state.client.first_name} />
+          <FormRowDisplay className='client' title='Last Name' value={this.state.client.last_name} />
 
           <FormCategoryRow title='Client Location' />
-          <FormRowDisplay className='client' title='Hospital Name' value={this.state.client.hospitalName} />
+          <FormRowDisplay className='client' title='Hospital Name' value={this.state.client.hospital_name} />
           <FormRowDisplay className='client' title='City' value={this.state.client.city} />
-          <FormRowDisplay className='client' title='State' value={this.state.client.clientState} />
+          <FormRowDisplay className='client' title='State' value={this.state.client.client_state} />
 
           <FormCategoryRow title='Time Frame' />
           <FormRowDisplay className='client' title='Start Date' value={this.state.client.startDate} />
