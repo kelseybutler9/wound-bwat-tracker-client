@@ -21,7 +21,7 @@ export class BWATForm extends React.Component {
       clientSelected: false,
       clientName: '',
       clientId: '',
-      date_of_form: '',
+      date_of_form: new Date(),
       wound_location: ['Sacrum and Coccyx','Lateral ankle','Trochanter','Medial ankle','Ischial tuberosity','Heel','other'],
       shape: ['Irregular','Linear or elongated','Round/Oval','Bowl/boat','Square/rectangle','Butterfly','Other Shape'],
       question_one: ['1 = Length x width less than 4 sq cm','2 = Length x width 4-16 sq cm', '3 = Length x width 16.1--36 sq cml','4 = Length x width 36.1--80 sq cm','5 = Length x width greater than 80 sq cm'],
@@ -60,15 +60,17 @@ export class BWATForm extends React.Component {
   onDateChange = date => this.setState({date_of_form: date});
 
   onChange(e) {
-      e.preventDefault();
+      const self = this;
       const name = e.target.value;
       const nameId = name.split("-");
-      this.setState(
+      self.setState(
         { clientId: nameId[1],
           clientSelected: true,
-          clientName:nameId[0]
+          clientName: nameId[0]
         }
       );
+      console.log(nameId);
+      console.log(self.state.clientId);
   }
 
   onSubmit(e) {
@@ -76,8 +78,7 @@ export class BWATForm extends React.Component {
     Object.keys(e).forEach(function(key) {
       if(key.includes('question')) {
       scores.push(e[key]);
-    }
-    });
+    }});
     this.props.dispatch(generateScore(scores));
     console.log(this.state.score);
 
@@ -86,7 +87,7 @@ export class BWATForm extends React.Component {
     //   url: `${API_BASE_URL}/forms`,
     //   data: {
     //     client_id: this.state.clientId,
-    //     date_of_form: e[`date_of_form`],
+    //     date_of_form: this.state.date_of_form,
     //     wound_location: e[`wound_location`],
     //     shape_of_wound: e[`shape`],
     //     question_one: e[`question_one`],
@@ -114,7 +115,6 @@ export class BWATForm extends React.Component {
   // })
 
   }
-
 
   render () {
 
