@@ -8,8 +8,105 @@ import DatePicker from 'react-date-picker';
 import TopNav from '../top-nav/top-nav';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
+import styled, {css} from 'styled-components';
 
-import './client-form.css';
+const Wrapper = styled.div`
+  max-width:400px;
+  margin:50px auto;
+  background:#fff;
+  border-radius:2px;
+  padding:20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+`;
+
+const Title = styled.h2`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size:x-large;
+
+  ${props => props.header && css`
+    font-size: large;
+    `}
+`;
+
+const Button = styled.button`
+   background: #2471FF;
+   border: none;
+   padding: 10px 20px 10px 20px;
+   border-bottom: 3px solid #5994FF;
+   border-radius: 3px;
+   color: #D2E2FF;
+
+   :hover{
+      background: #6B9FFF;
+      color:#fff;
+   }
+`;
+
+const InputWrapper = styled.ul`
+  list-style:none;
+  padding:0;
+  margin:0;
+`;
+
+const FormRowCategory = styled.div`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size:medium;
+`;
+
+const Label = styled.label`
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: #FFFFFF;
+  height: 14px;
+  padding: 2px 5px 2px 5px;
+  color: #B9B9B9;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+const Input = styled.li`
+  display: block;
+  padding: 9px;
+  border:1px solid #DDDDDD;
+  margin-bottom: 30px;
+  border-radius: 3px;
+`;
+
+const select = styled.input`
+  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    display: block;
+    outline: none;
+    border: none;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    padding: 0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+`;
+
+const Question = styled.div`
+ background: #F3F3F3;
+ display: block;
+ padding: 3px;
+ margin: 0 -9px -9px -9px;
+ text-align: center;
+ color: #C0C0C0;
+ font-family: Arial, Helvetica, sans-serif;
+ font-size: 11px;
+`;
 
 export class ClientForm extends React.Component {
   constructor (props) {
@@ -64,68 +161,84 @@ export class ClientForm extends React.Component {
 
        if (this.state.complete) {
            return (
-             <div className="client-form">
+             <Wrapper>
                <TopNav />
-             <div>
-               <p>{this.feedback}</p>
-               <button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></button>
-             </div>
-             </div>
+               <div>
+                 <Label>{this.feedback}</Label>
+                 <Button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></Button>
+               </div>
+             </Wrapper>
            );
        }
 
        if (this.state.error) {
            return (
-             <div className="client-form">
+             <Wrapper>
                <TopNav />
-               <div>
-                 <p>{this.feedback}</p>
-                 <button><Link to={'/new-client'}>Create a New Client</Link></button>
-               </div>
-             </div>
+                 <Label>{this.feedback}</Label>
+                 <Button><Link to={'/new-client'}>Create a New Client</Link></Button>
+             </Wrapper>
            );
        }
     else {
       return (
-        <div className="client-form">
+        <Wrapper>
           <TopNav />
           <form onSubmit={this.props.handleSubmit(values =>
                   this.onSubmit(values)
                 )} >
-            <h2>New Client</h2>
+            <Title>New Client</Title>
             <FormCategoryRow title='Client Name' />
-            <label>First Name</label>
-            <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
-            <label>Last Name</label>
-            <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
+            <Input>
+              <Label>First Name</Label>
+              <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
+            </Input>
+            <Input>
+              <Label>Last Name</Label>
+              <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
             <FormCategoryRow title='Client Location' />
-            <label>Hospital Name</label>
-            <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
-            <label>City</label>
-            <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
-            <label>State</label>
-            <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
+            <Input>
+              <Label>Hospital Name</Label>
+              <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
+            <Input>
+              <Label>City</Label>
+              <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
+            <Input>
+              <Label>State</Label>
+              <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
             <FormCategoryRow title='Time Frame' />
-            <label>Start Date</label>
-            <DatePicker
-               name='startDate'
-               onChange={this.onStartChange}
-               value={this.state.startDate}
-            />
-            <label>End Date</label>
-            <DatePicker
-              name='endDate'
-              onChange={this.onEndChange}
-              value={this.state.endDate}
-            />
+            <Input>
+              <Label>Start Date</Label>
+              <DatePicker
+                 name='startDate'
+                 onChange={this.onStartChange}
+                 value={this.state.startDate}
+              />
+            </Input>
+            <Input>
+              <Label>End Date</Label>
+              <DatePicker
+                name='endDate'
+                onChange={this.onEndChange}
+                value={this.state.endDate}
+              />
+            </Input>
             <FormCategoryRow title='Client Information' />
-            <label>Age</label>
-            <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
-            <label>Weight</label>
-            <Field name='weight' type='text' label='Weight' component= 'input' validate={[required, nonEmpty]} />
-            <button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</button>
+            <Input>
+              <Label>Age</Label>
+              <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
+            <Input>
+              <Label>Weight</Label>
+              <Field name='weight' type='text' Label='Weight' component= 'input' validate={[required, nonEmpty]} />
+            </Input>
+            <Button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</Button>
           </form>
-        </div>
+        </Wrapper>
       );
     }
   }

@@ -224,14 +224,16 @@ export class BWATForm extends React.Component {
         <TopNav />
           <form>
             <Title>BWAT Wound Form</Title>
-            <Label>Select an existing client</Label>
-            <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
-              {this.state.clients.map(client => (
-                <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
-                  {client.first_name} {client.last_name}
-                </option>
-                ))}
-            </Field>
+            <Input>
+              <Label>Select an existing client</Label>
+              <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
+                {this.state.clients.map(client => (
+                  <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
+                    {client.first_name} {client.last_name}
+                  </option>
+                  ))}
+              </Field>
+            </Input>
             <Button><Link to={'/new-client'}>Create New Client</Link></Button>
           </form>
         </Wrapper>

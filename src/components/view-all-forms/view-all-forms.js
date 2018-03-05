@@ -10,8 +10,70 @@ import connect from 'react-redux';
 import {fetchClients, fetchClient, fetchForms} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
+import styled, {css} from 'styled-components';
 
-import './view-all-forms.css'
+const Wrapper = styled.div`
+  max-width:400px;
+  margin:50px auto;
+  background:#fff;
+  border-radius:2px;
+  padding:20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+`;
+
+const Title = styled.h2`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size:x-large;
+
+  ${props => props.header && css`
+    font-size: large;
+    `}
+`;
+
+const Button = styled.button`
+   background: #2471FF;
+   border: none;
+   padding: 10px 20px 10px 20px;
+   border-bottom: 3px solid #5994FF;
+   border-radius: 3px;
+   color: #D2E2FF;
+
+   :hover{
+      background: #6B9FFF;
+      color:#fff;
+   }
+`;
+
+const InputWrapper = styled.ul`
+  list-style:none;
+  padding:0;
+  margin:0;
+`;
+
+const Label = styled.label`
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: #FFFFFF;
+  height: 14px;
+  padding: 2px 5px 2px 5px;
+  color: #B9B9B9;
+  font-size: 14px;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+const Input = styled.li`
+  display: block;
+  padding: 9px;
+  border:1px solid #DDDDDD;
+  margin-bottom: 30px;
+  border-radius: 3px;
+`;
 
 export class ViewAllForms extends React.Component {
   constructor (props) {
@@ -81,25 +143,27 @@ export class ViewAllForms extends React.Component {
 
     if(!this.state.clientSelected) {
       return (
-        <div>
+        <Wrapper>
         <TopNav />
-        <label>Select a Client</label>
-        <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
-          {this.state.clients.map(client => (
-            <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
-              {client.first_name} {client.last_name}
-            </option>
-            ))}
-        </Field>
-        </div>
+        <Input>
+          <Label>Select a Client</Label>
+          <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
+            {this.state.clients.map(client => (
+              <option value={`${client.first_name} ${client.last_name}-${client.id}`} key={client.id} id={client.id}>
+                {client.first_name} {client.last_name}
+              </option>
+              ))}
+          </Field>
+        </Input>
+        </Wrapper>
       )
     }
 
     return (
-      <div className='client'>
+      <Wrapper>
       <TopNav />
         <div className='view-client'>
-          <h2>Client</h2>
+          <Title>Client</Title>
           <FormCategoryRow title='Client Name' />
           <FormRowDisplay className='client' title='First Name' value={this.state.client.first_name} />
           <FormRowDisplay className='client' title='Last Name' value={this.state.client.last_name} />
@@ -121,7 +185,7 @@ export class ViewAllForms extends React.Component {
       <div className="view-forms">
         {BWATForms}
       </div>
-    </div>
+    </Wrapper>
     );
   }
 }

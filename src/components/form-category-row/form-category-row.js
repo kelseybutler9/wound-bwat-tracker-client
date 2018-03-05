@@ -1,11 +1,20 @@
 import React from 'react';
-import './form-category-row.css';
+import styled, {css} from 'styled-components';
+
+const Title = styled.h3`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size: large;
+`;
 
 export default function FormCategoryRow (props) {
   return (
-    <h3 className='form-category-row'>
+    <Title className='form-category-row'>
       {props.title}
-    </h3>
+    </Title>
   );
 }
 
