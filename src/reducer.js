@@ -1,16 +1,17 @@
 import * as actions from './actions';
 
 const initialState = {
-  score: 0
+  score: 13
 }
 
 export const appReducer = (state = initialState, action) => {
   if(action.type === actions.GENERATE_SCORE) {
-    console.log(`scores: ${action.scores}`);
-    action.scores.forEach(scoreItem => (
-      action.score += scoreItem + 1
-    ));
-    console.log(action.score);
+    let newScore = 13;
+    action.scores.forEach(scoreItem => {
+      let item = Number(scoreItem);
+      newScore += item;
+    });
+    action.score = newScore;
     return Object.assign({}, state, {
       score: action.score
     });

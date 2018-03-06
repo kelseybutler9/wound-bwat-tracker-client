@@ -86,11 +86,11 @@ const Input = styled.li`
   border-radius: 3px;
 `;
 
-const select = styled.input`
-  box-sizing: border-box;
+const select = styled.select`
+    box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    width: 100%;
+    width: 150px;
     display: block;
     outline: none;
     border: none;
@@ -162,14 +162,14 @@ export class BWATForm extends React.Component {
       const self = this;
       const name = e.target.value;
       const nameId = name.split("-");
+      console.log(nameId[1]);
+      console.log(nameId[0]);
       self.setState(
         { clientId: nameId[1],
           clientSelected: true,
           clientName: nameId[0]
         }
       );
-      console.log(nameId);
-      console.log(self.state.clientId);
   }
 
   onSubmit(e) {
@@ -178,6 +178,7 @@ export class BWATForm extends React.Component {
       if(key.includes('question')) {
       scores.push(e[key]);
     }});
+    console.log(scores);
     this.props.dispatch(generateScore(scores));
     console.log(this.state.score);
 
@@ -250,7 +251,7 @@ export class BWATForm extends React.Component {
                     this.onSubmit(values)
                   )}>
             <Title>BWAT Wound Form</Title>
-            <Title header>Client: {this.state.clientName}</Title>
+            <Title header>Client: {this.state.clientName} </Title>
             <InputWrapper>
               <Input>
                 <Label>Date of Form</Label>
@@ -275,7 +276,6 @@ export class BWATForm extends React.Component {
               <Input>
                 <Label>Shape</Label>
                 <Field name='shape' component='select' validate={[required, nonEmpty]}>
-
                   {this.state.shape.map(choice => (
                     <option key={choice}>
                       {choice}
