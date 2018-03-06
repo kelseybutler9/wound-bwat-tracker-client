@@ -1,9 +1,7 @@
 import React from 'react';
-import './bwat-preview.css';
 import {Link} from 'react-router-dom';
 
 export default function BWATPreview (props) {
-
 
   return (
     <div className='bwat-preview' id={props.id}>

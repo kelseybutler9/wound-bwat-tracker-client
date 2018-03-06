@@ -6,8 +6,6 @@ import {Link} from 'react-router-dom';
 import FormRowDisplay from '../form-row-display/form-row-display';
 import {reduxForm} from 'redux-form';
 
-import './login-form.css';
-
 export class LogIn extends React.Component {
   onSubmit(values) {
         console.log(values);

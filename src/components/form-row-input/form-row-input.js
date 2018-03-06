@@ -1,5 +1,4 @@
 import React from 'react';
-import './form-row-input.css';
 
 export default class FormRowInput extends React.Component {
   constructor (props) {

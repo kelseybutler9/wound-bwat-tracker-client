@@ -3,8 +3,6 @@ import {Field} from 'redux-form';
 import {required, nonEmpty} from '../../validators';
 import FormRowInput from '../form-row-input/form-row-input';
 
-import './signup-form.css'
-
 export default function SignUp(props) {
   return (
     <form>

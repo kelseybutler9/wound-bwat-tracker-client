@@ -8,8 +8,6 @@ import LogIn from '../login-form/login-form';
 import SignUp from '../signup-form/signup-form';
 import ClientForm from '../client-form/client-form';
 
-import './app.css';
-
 export default function App(props) {
   return (
     <Router>
