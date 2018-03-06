@@ -16,15 +16,17 @@ const Wrapper = styled.div`
   padding:20px;
   font-family: Georgia, "Times New Roman", Times, serif;
   background-repeat: repeat;
+  color: #5C5C5C;
 `;
 
 const Title = styled.h2`
   display: block;
+  text-decoration: none;
   text-align: center;
   padding: 0;
   margin: 0px 0px 20px 0px;
-  color: #a9a9a9;
-  font-size:x-large;
+  color: #5C5C5C;
+  font-size: 2em;
 `;
 
 export default function App(props) {

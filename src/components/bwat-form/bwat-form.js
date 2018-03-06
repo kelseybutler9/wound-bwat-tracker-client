@@ -63,15 +63,6 @@ const InputWrapper = styled.ul`
   margin:0;
 `;
 
-const FormRowCategory = styled.div`
-  display: block;
-  text-align: center;
-  padding: 0;
-  margin: 0px 0px 20px 0px;
-  color: #5C5C5C;
-  font-size:medium;
-`;
-
 const Label = styled.label`
   display: block;
   float: left;

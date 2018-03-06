@@ -14,6 +14,7 @@ const Wrapper = styled.div`
   margin:50px auto;
   background:#fff;
   border-radius:2px;
+  border: 2px solid #a9a9a9;
   padding:20px;
   font-family: Georgia, "Times New Roman", Times, serif;
 `;
@@ -32,17 +33,25 @@ const Title = styled.h2`
 `;
 
 const Button = styled.button`
-   background: #2471FF;
+   background: #FFFFFF;
    border: none;
    padding: 10px 20px 10px 20px;
-   border-bottom: 3px solid #5994FF;
+   border: 1px solid #5C5C5C;
    border-radius: 3px;
-   color: #D2E2FF;
+   color: #5C5C5C;
+   font-family: Georgia, "Times New Roman", Times, serif;
+   text-align: center;
 
    :hover{
-      background: #6B9FFF;
+      background: #5C5C5C;
       color:#fff;
    }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.ul`
@@ -51,31 +60,22 @@ const InputWrapper = styled.ul`
   margin:0;
 `;
 
-const FormRowCategory = styled.div`
-  display: block;
-  text-align: center;
-  padding: 0;
-  margin: 0px 0px 20px 0px;
-  color: #5C5C5C;
-  font-size:medium;
-`;
-
 const Label = styled.label`
   display: block;
   float: left;
   margin-top: -19px;
   background: #FFFFFF;
   height: 14px;
-  padding: 2px 5px 2px 5px;
-  color: #B9B9B9;
-  font-size: 14px;
+  padding: 2px 5px 5px 5px;
+  color: #5C5C5C;
+  font-size: 1em;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const Input = styled.li`
   display: block;
-  padding: 9px;
+  padding: 5px;
   border:1px solid #DDDDDD;
   margin-bottom: 30px;
   border-radius: 3px;
@@ -85,11 +85,11 @@ const Question = styled.div`
  background: #F3F3F3;
  display: block;
  padding: 3px;
- margin: 0 -9px -9px -9px;
+ margin: 5px -9px -9px -9px;
  text-align: center;
- color: #C0C0C0;
+ color: #5C5C5C;
  font-family: Arial, Helvetica, sans-serif;
- font-size: 11px;
+ font-size: .75em;
 `;
 
 export class ClientForm extends React.Component {
@@ -170,51 +170,58 @@ export class ClientForm extends React.Component {
                 )} >
             <Title>New Client</Title>
             <FormCategoryRow title='Client Name' />
-            <Input>
-              <Label>First Name</Label>
-              <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
-            </Input>
-            <Input>
-              <Label>Last Name</Label>
-              <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <FormCategoryRow title='Client Location' />
-            <Input>
-              <Label>Hospital Name</Label>
-              <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <Input>
-              <Label>City</Label>
-              <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <Input>
-              <Label>State</Label>
-              <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <FormCategoryRow title='Time Frame' />
-            <Input>
-              <Label>Start Date - End Date</Label>
-              <DatePicker
-                 name='startDate'
-                 onChange={this.onStartChange}
-                 value={this.state.startDate}
-              />
-              <DatePicker
-                name='endDate'
-                onChange={this.onEndChange}
-                value={this.state.endDate}
-              />
-            </Input>
-            <FormCategoryRow title='Client Information' />
-            <Input>
-              <Label>Age</Label>
-              <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <Input>
-              <Label>Weight</Label>
-              <Field name='weight' type='text' Label='Weight' component= 'input' validate={[required, nonEmpty]} />
-            </Input>
-            <Button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</Button>
+            <InputWrapper>
+              <Input>
+                <Label>First Name</Label>
+                <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
+              </Input>
+              <Input>
+                <Label>Last Name</Label>
+                <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+              <FormCategoryRow title='Client Location' />
+              <Input>
+                <Label>Hospital Name</Label>
+                <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+              <Input>
+                <Label>City</Label>
+                <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+              <Input>
+                <Label>State</Label>
+                <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+              <FormCategoryRow title='Time Frame' />
+              <Input>
+                <Label>Start Date</Label>
+                <DatePicker
+                   name='startDate'
+                   onChange={this.onStartChange}
+                   value={this.state.startDate}
+                />
+              </Input>
+              <Input>
+                <Label>End Date</Label>
+                <DatePicker
+                  name='endDate'
+                  onChange={this.onEndChange}
+                  value={this.state.endDate}
+                />
+              </Input>
+              <FormCategoryRow title='Client Information' />
+              <Input>
+                <Label>Age</Label>
+                <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+              <Input>
+                <Label>Weight</Label>
+                <Field name='weight' type='text' Label='Weight' component= 'input' validate={[required, nonEmpty]} />
+              </Input>
+            </InputWrapper>
+            <ButtonWrapper>
+              <Button type='submit' disabled={this.props.pristine || this.props.submitting}>Create Client</Button>
+            </ButtonWrapper>
           </form>
         </Wrapper>
       );

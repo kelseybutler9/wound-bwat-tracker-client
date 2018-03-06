@@ -22,3 +22,18 @@ select {
 .react-calendar_month-view, .react-calendar_month-view_weekdays_weekday{
   background-color: #fff;
 }
+
+input {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  width: 80%;
+  display: block;
+  outline: none;
+  border: none;
+  height: 25px;
+  line-height: 25px;
+  font-size: 16px;
+  padding: 2px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}

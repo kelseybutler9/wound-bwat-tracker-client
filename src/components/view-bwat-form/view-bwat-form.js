@@ -1,7 +1,6 @@
 import React from 'react';
 import FormCategoryRow from '../form-category-row/form-category-row';
 import FormRowDisplay from '../form-row-display/form-row-display';
-import TopNav from '../top-nav/top-nav';
 import {Link} from 'react-router-dom';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
@@ -83,7 +82,6 @@ export class ViewBWATForm extends React.Component {
   return (
 
     <div className='view-bwat'>
-    <TopNav />
       <h1>{this.state.client.first_name} {this.state.client.last_name} BWAT Form - {this.state.form.date_of_form}</h1>
       <h2>BWAT Wound Form</h2>
 

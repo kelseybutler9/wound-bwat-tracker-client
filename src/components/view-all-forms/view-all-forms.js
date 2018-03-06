@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   margin:50px auto;
   background:#fff;
   border-radius:2px;
+  border: 2px solid #a9a9a9;
   padding:20px;
   font-family: Georgia, "Times New Roman", Times, serif;
 `;
@@ -34,17 +35,25 @@ const Title = styled.h2`
 `;
 
 const Button = styled.button`
-   background: #2471FF;
+   background: #FFFFFF;
    border: none;
    padding: 10px 20px 10px 20px;
-   border-bottom: 3px solid #5994FF;
+   border: 1px solid #5C5C5C;
    border-radius: 3px;
-   color: #D2E2FF;
+   color: #5C5C5C;
+   font-family: Georgia, "Times New Roman", Times, serif;
+   text-align: center;
 
    :hover{
-      background: #6B9FFF;
+      background: #5C5C5C;
       color:#fff;
    }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.ul`
@@ -59,16 +68,16 @@ const Label = styled.label`
   margin-top: -19px;
   background: #FFFFFF;
   height: 14px;
-  padding: 2px 5px 2px 5px;
-  color: #B9B9B9;
-  font-size: 14px;
+  padding: 2px 5px 5px 5px;
+  color: #5C5C5C;
+  font-size: 1em;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const Input = styled.li`
   display: block;
-  padding: 9px;
+  padding: 10px;
   border:1px solid #DDDDDD;
   margin-bottom: 30px;
   border-radius: 3px;
@@ -159,30 +168,27 @@ export class ViewAllForms extends React.Component {
 
     return (
       <Wrapper>
-        <div className='view-client'>
+        <div>
           <Title>Client</Title>
           <FormCategoryRow title='Client Name' />
-          <FormRowDisplay className='client' title='First Name' value={this.state.client.first_name} />
-          <FormRowDisplay className='client' title='Last Name' value={this.state.client.last_name} />
+          <FormRowDisplay title='First Name' value={this.state.client.first_name} />
+          <FormRowDisplay title='Last Name' value={this.state.client.last_name} />
 
           <FormCategoryRow title='Client Location' />
-          <FormRowDisplay className='client' title='Hospital Name' value={this.state.client.hospital_name} />
-          <FormRowDisplay className='client' title='City' value={this.state.client.city} />
-          <FormRowDisplay className='client' title='State' value={this.state.client.client_state} />
+          <FormRowDisplay title='Hospital Name' value={this.state.client.hospital_name} />
+          <FormRowDisplay title='City' value={this.state.client.city} />
+          <FormRowDisplay title='State' value={this.state.client.client_state} />
 
           <FormCategoryRow title='Time Frame' />
-          <FormRowDisplay className='client' title='Start Date' value={this.state.client.startDate} />
-          <FormRowDisplay className='client' title='End Date' value={this.state.client.endDate} />
+          <FormRowDisplay title='Start Date' value={this.state.client.startDate} />
+          <FormRowDisplay title='End Date' value={this.state.client.endDate} />
 
           <FormCategoryRow title='Client Information' />
-          <FormRowDisplay className='client' title='Age' value={this.state.client.age} />
-          <FormRowDisplay className='client' title='Weight' value={this.state.client.weight} />
+          <FormRowDisplay title='Age' value={this.state.client.age} />
+          <FormRowDisplay title='Weight' value={this.state.client.weight} />
         </div>
-
         <FormCategoryRow title='BWAT Forms' />
-        <div className="view-forms">
           {BWATForms}
-        </div>
     </Wrapper>
     );
   }

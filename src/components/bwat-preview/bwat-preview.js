@@ -5,7 +5,7 @@ import styled, {css} from 'styled-components';
 export default function BWATPreview (props) {
   const Wrapper = styled.div`
     max-width:400px;
-    margin:50px auto;
+    margin:10px auto;
     background:#fff;
     border-radius:2px;
     padding:20px;
