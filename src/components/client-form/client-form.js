@@ -5,7 +5,6 @@ import FormRowInput from '../form-row-input/form-row-input';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-date-picker';
-import TopNav from '../top-nav/top-nav';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
@@ -82,21 +81,6 @@ const Input = styled.li`
   border-radius: 3px;
 `;
 
-const select = styled.input`
-  box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 100%;
-    display: block;
-    outline: none;
-    border: none;
-    height: 25px;
-    line-height: 25px;
-    font-size: 16px;
-    padding: 0;
-    font-family: Georgia, "Times New Roman", Times, serif;
-`;
-
 const Question = styled.div`
  background: #F3F3F3;
  display: block;
@@ -162,7 +146,6 @@ export class ClientForm extends React.Component {
        if (this.state.complete) {
            return (
              <Wrapper>
-               <TopNav />
                <div>
                  <Label>{this.feedback}</Label>
                  <Button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></Button>
@@ -174,7 +157,6 @@ export class ClientForm extends React.Component {
        if (this.state.error) {
            return (
              <Wrapper>
-               <TopNav />
                  <Label>{this.feedback}</Label>
                  <Button><Link to={'/new-client'}>Create a New Client</Link></Button>
              </Wrapper>
@@ -183,7 +165,6 @@ export class ClientForm extends React.Component {
     else {
       return (
         <Wrapper>
-          <TopNav />
           <form onSubmit={this.props.handleSubmit(values =>
                   this.onSubmit(values)
                 )} >
@@ -212,15 +193,12 @@ export class ClientForm extends React.Component {
             </Input>
             <FormCategoryRow title='Time Frame' />
             <Input>
-              <Label>Start Date</Label>
+              <Label>Start Date - End Date</Label>
               <DatePicker
                  name='startDate'
                  onChange={this.onStartChange}
                  value={this.state.startDate}
               />
-            </Input>
-            <Input>
-              <Label>End Date</Label>
               <DatePicker
                 name='endDate'
                 onChange={this.onEndChange}

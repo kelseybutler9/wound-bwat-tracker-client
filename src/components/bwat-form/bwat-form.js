@@ -5,9 +5,7 @@ import FormRowDisplay from '../form-row-display/form-row-display';
 import ClientForm from '../client-form/client-form';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
-import './bwat-form.css';
 import DatePicker from 'react-date-picker';
-import TopNav from '../top-nav/top-nav';
 import connect from 'react-redux';
 import {fetchClients, generateScore} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
@@ -19,6 +17,7 @@ const Wrapper = styled.div`
   margin:50px auto;
   background:#fff;
   border-radius:2px;
+  border: 2px solid #a9a9a9;
   padding:20px;
   font-family: Georgia, "Times New Roman", Times, serif;
 `;
@@ -37,17 +36,25 @@ const Title = styled.h2`
 `;
 
 const Button = styled.button`
-   background: #2471FF;
+   background: #FFFFFF;
    border: none;
    padding: 10px 20px 10px 20px;
-   border-bottom: 3px solid #5994FF;
+   border: 1px solid #5C5C5C;
    border-radius: 3px;
-   color: #D2E2FF;
+   color: #5C5C5C;
+   font-family: Georgia, "Times New Roman", Times, serif;
+   text-align: center;
 
    :hover{
-      background: #6B9FFF;
+      background: #5C5C5C;
       color:#fff;
    }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const InputWrapper = styled.ul`
@@ -71,45 +78,30 @@ const Label = styled.label`
   margin-top: -19px;
   background: #FFFFFF;
   height: 14px;
-  padding: 2px 5px 2px 5px;
-  color: #B9B9B9;
-  font-size: 14px;
+  padding: 2px 5px 5px 5px;
+  color: #5C5C5C;
+  font-size: 1em;
   overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
 const Input = styled.li`
   display: block;
-  padding: 9px;
+  padding: 10px;
   border:1px solid #DDDDDD;
   margin-bottom: 30px;
   border-radius: 3px;
-`;
-
-const select = styled.select`
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 150px;
-    display: block;
-    outline: none;
-    border: none;
-    height: 25px;
-    line-height: 25px;
-    font-size: 16px;
-    padding: 0;
-    font-family: Georgia, "Times New Roman", Times, serif;
 `;
 
 const Question = styled.div`
  background: #F3F3F3;
  display: block;
  padding: 3px;
- margin: 0 -9px -9px -9px;
+ margin: 5px -9px -9px -9px;
  text-align: center;
- color: #C0C0C0;
+ color: #5C5C5C;
  font-family: Arial, Helvetica, sans-serif;
- font-size: 11px;
+ font-size: .75em;
 `;
 
 export class BWATForm extends React.Component {
@@ -222,7 +214,6 @@ export class BWATForm extends React.Component {
     if(!this.state.clientSelected) {
       return(
         <Wrapper>
-        <TopNav />
           <form>
             <Title>BWAT Wound Form</Title>
             <Input>
@@ -235,7 +226,9 @@ export class BWATForm extends React.Component {
                   ))}
               </Field>
             </Input>
-            <Button><Link to={'/new-client'}>Create New Client</Link></Button>
+            <ButtonWrapper>
+              <Button><Link to={'/new-client'}>Create New Client</Link></Button>
+            </ButtonWrapper>
           </form>
         </Wrapper>
       )
@@ -245,7 +238,6 @@ export class BWATForm extends React.Component {
     {
       return (
         <Wrapper>
-          <TopNav />
           <form
             onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
@@ -282,7 +274,7 @@ export class BWATForm extends React.Component {
                     </option>
                   ))}
                 </Field>
-                <Question>Shape: Overall wound patter; assess by observing perimeter and depth?</Question>
+                <Question>Overall wound patter; assess by observing perimeter and depth?</Question>
               </Input>
               <FormCategoryRow title='Questions' />
               <Input>
@@ -442,7 +434,9 @@ export class BWATForm extends React.Component {
                 <Question>Question Thirteen</Question>
               </Input>
             </InputWrapper>
-            <Button type='submit' disabled={this.props.pristine || this.props.submitting}>Create BWAT Form</Button>
+            <ButtonWrapper>
+              <Button type='submit' disabled={this.props.pristine || this.props.submitting}>Create BWAT Form</Button>
+            </ButtonWrapper>
           </form>
         </Wrapper>
       );
@@ -450,7 +444,6 @@ export class BWATForm extends React.Component {
 
     return (
       <Wrapper>
-        <TopNav />
         <FormRowDisplay title='Your Form has been successfully added! Your Weekly Score:' value={this.state.score} />
       </Wrapper>
     );

@@ -3,7 +3,6 @@ import FormCategoryRow from '../form-category-row/form-category-row';
 import FormRowDisplay from '../form-row-display/form-row-display';
 import FormRowInput from '../form-row-input/form-row-input';
 import BWATPreview from '../bwat-preview/bwat-preview';
-import TopNav from '../top-nav/top-nav';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../../validators';
 import connect from 'react-redux';
@@ -144,7 +143,6 @@ export class ViewAllForms extends React.Component {
     if(!this.state.clientSelected) {
       return (
         <Wrapper>
-        <TopNav />
         <Input>
           <Label>Select a Client</Label>
           <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
@@ -161,7 +159,6 @@ export class ViewAllForms extends React.Component {
 
     return (
       <Wrapper>
-      <TopNav />
         <div className='view-client'>
           <Title>Client</Title>
           <FormCategoryRow title='Client Name' />
@@ -182,9 +179,10 @@ export class ViewAllForms extends React.Component {
           <FormRowDisplay className='client' title='Weight' value={this.state.client.weight} />
         </div>
 
-      <div className="view-forms">
-        {BWATForms}
-      </div>
+        <FormCategoryRow title='BWAT Forms' />
+        <div className="view-forms">
+          {BWATForms}
+        </div>
     </Wrapper>
     );
   }

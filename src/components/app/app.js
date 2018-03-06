@@ -7,13 +7,33 @@ import BWATForm from '../bwat-form/bwat-form';
 import LogIn from '../login-form/login-form';
 import SignUp from '../signup-form/signup-form';
 import ClientForm from '../client-form/client-form';
+import styled, {css} from 'styled-components';
+import TopNav from '../top-nav/top-nav';
+
+const Wrapper = styled.div`
+  background-image: url('https://image.freepik.com/free-vector/grey-linen-texture-background_1053-253.jpg');
+  border-radius:2px;
+  padding:20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-repeat: repeat;
+`;
+
+const Title = styled.h2`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #a9a9a9;
+  font-size:x-large;
+`;
 
 export default function App(props) {
   return (
     <Router>
-      <div className='app'>
+      <Wrapper>
         <header>
-          <h1><Link to='/'>Wound Care BWAT Tracker</Link></h1>
+          <Title><Link to='/'>Wound Care BWAT Tracker</Link></Title>
+          <TopNav />
         </header>
         <main>
           <Route exact path='/' component={Home} />
@@ -24,7 +44,7 @@ export default function App(props) {
           <Route exact path='/forms' component={ViewAllForms} />
           <Route exact path='/view/:id' component={ViewBWATForm} />
         </main>
-      </div>
+      </Wrapper>
     </Router>
   );
 }
