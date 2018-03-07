@@ -6,9 +6,81 @@ import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import {reduxForm, Field} from 'redux-form';
 import connect from 'react-redux';
+import styled, {css} from 'styled-components';
+
+const Wrapper = styled.div`
+  max-width:400px;
+  margin:50px auto;
+  background:#fff;
+  border-radius:2px;
+  border: 2px solid #a9a9a9;
+  padding:20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+`;
+
+const Title = styled.h2`
+  display: block;
+  text-align: center;
+  padding: 0;
+  margin: 0px 0px 20px 0px;
+  color: #5C5C5C;
+  font-size:x-large;
+
+  ${props => props.header && css`
+    font-size: large;
+    `}
+`;
+
+const Button = styled.button`
+   background: #FFFFFF;
+   border: none;
+   padding: 10px 20px 10px 20px;
+   border: 1px solid #5C5C5C;
+   border-radius: 3px;
+   color: #5C5C5C;
+   font-family: Georgia, "Times New Roman", Times, serif;
+   text-align: center;
+
+   :hover{
+      background: #5C5C5C;
+      color:#fff;
+   }
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const InputWrapper = styled.ul`
+  list-style:none;
+  padding:0;
+  margin:0;
+`;
+
+const Label = styled.label`
+  display: block;
+  float: left;
+  margin-top: -19px;
+  background: #FFFFFF;
+  height: 14px;
+  padding: 2px 5px 5px 5px;
+  color: #5C5C5C;
+  font-size: 1em;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+`;
+
+const Input = styled.li`
+  display: block;
+  padding: 10px;
+  border:1px solid #DDDDDD;
+  margin-bottom: 30px;
+  border-radius: 3px;
+`;
 
 export class ViewBWATForm extends React.Component {
-
   constructor (props) {
     super(props);
     this.state = {
@@ -50,6 +122,8 @@ export class ViewBWATForm extends React.Component {
     const formId = url.split('http://localhost:3000/view/');
       axios.get(`${API_BASE_URL}/forms/${formId[1]}`)
       .then(function (response) {
+        let date = response.data.date_of_form.split('T');
+        response.data.date_of_form = date[0];
         self.setState({form: response.data});
         Object.keys(self.state.form).forEach((key, index) => {
           if(key.includes('question')) {
@@ -66,46 +140,38 @@ export class ViewBWATForm extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
-      // axios.get(`${API_BASE_URL}/clients/${self.form.client_id}`)
-      // .then(function (response) {
-      //   self.setState({client: response.data});
-      // })
-      // .catch(function (error) {
-      //   console.log(error);
-      // });
   }
-
-
 
   render() {
   return (
 
-    <div className='view-bwat'>
-      <h1>{this.state.client.first_name} {this.state.client.last_name} BWAT Form - {this.state.form.date_of_form}</h1>
-      <h2>BWAT Wound Form</h2>
+    <Wrapper>
+      <Title>{this.state.client.first_name} {this.state.client.last_name} BWAT Form - {this.state.form.date_of_form}</Title>
+      <Title header>BWAT Wound Form</Title>
 
       <FormCategoryRow title='Wound Information' />
-      <FormRowDisplay className='question' title='Where is the wound located? Anatomic site' value={this.state.questionValues[0]} />
-      <FormRowDisplay className='question' title='Shape: Overall wound patter; assess by observing perimeter and depth.' value={this.state.questionValues[1]} />
-      <FormRowDisplay className='question' title='1. Size' value={this.state.questionValues[2]} />
-      <FormRowDisplay className='question' title='2. Depth' value={this.state.questionValues[3]} />
-      <FormRowDisplay className='question' title='3. Edges' value={this.state.questionValues[4]} />
-      <FormRowDisplay className='question' title='4. Undermining' value={this.state.questionValues[5]} />
-      <FormRowDisplay className='question' title='5. Necrotic Tissue Type' value={this.state.questionValues[6]} />
-      <FormRowDisplay className='question' title='6. Necrotic Tissue Amount' value={this.state.questionValues[7]} />
-      <FormRowDisplay className='question' title='7. Exudate Type' value={this.state.questionValues[8]} />
-      <FormRowDisplay className='question' title='8. Exudate Amount' value={this.state.questionValues[9]} />
-      <FormRowDisplay className='question' title='9. Skin Color Surrounding Wound' value={this.state.questionValues[10]} />
-      <FormRowDisplay className='question' title='10. Peripheral Tissue Edema' value={this.state.questionValues[11]} />
-      <FormRowDisplay className='question' title='11. Peripheral Tissue Induration' value={this.state.questionValues[12]} />
-      <FormRowDisplay className='question' title='12. Granulation Tissue' value={this.state.questionValues[13]} />
-      <FormRowDisplay className='question' title='13. Epithelialization' value={this.state.questionValues[14]} />
+      <FormRowDisplay title='Where is the wound located? Anatomic site' value={this.state.questionValues[0]} />
+      <FormRowDisplay title='Shape: Overall wound patter; assess by observing perimeter and depth.' value={this.state.questionValues[1]} />
+      <FormRowDisplay title='1. Size' value={this.state.questionValues[2]} />
+      <FormRowDisplay title='2. Depth' value={this.state.questionValues[3]} />
+      <FormRowDisplay title='3. Edges' value={this.state.questionValues[4]} />
+      <FormRowDisplay title='4. Undermining' value={this.state.questionValues[5]} />
+      <FormRowDisplay title='5. Necrotic Tissue Type' value={this.state.questionValues[6]} />
+      <FormRowDisplay title='6. Necrotic Tissue Amount' value={this.state.questionValues[7]} />
+      <FormRowDisplay title='7. Exudate Type' value={this.state.questionValues[8]} />
+      <FormRowDisplay title='8. Exudate Amount' value={this.state.questionValues[9]} />
+      <FormRowDisplay title='9. Skin Color Surrounding Wound' value={this.state.questionValues[10]} />
+      <FormRowDisplay title='10. Peripheral Tissue Edema' value={this.state.questionValues[11]} />
+      <FormRowDisplay title='11. Peripheral Tissue Induration' value={this.state.questionValues[12]} />
+      <FormRowDisplay title='12. Granulation Tissue' value={this.state.questionValues[13]} />
+      <FormRowDisplay title='13. Epithelialization' value={this.state.questionValues[14]} />
 
       <FormCategoryRow title='Weekly Score' />
-      <FormRowDisplay className='score' title={this.state.form.date_of_form} value={this.state.form.score} />
-      <button><Link to={'/'}>Home</Link></button>
-  </div>
+      <FormRowDisplay title={this.state.form.date_of_form} value={this.state.form.score} />
+      <ButtonWrapper>
+        <Button><Link to={'/'}>Home</Link></Button>
+      </ButtonWrapper>
+  </Wrapper>
   );
   }
 }

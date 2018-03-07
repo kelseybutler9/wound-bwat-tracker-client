@@ -20,6 +20,11 @@ const Input = styled.li`
   border:1px solid #DDDDDD;
   margin-bottom: 30px;
   border-radius: 3px;
+  height: 50px;
+`;
+
+const Value = styled.div`
+  height: 10px;
 `;
 
 export default function FormRowDisplay (props) {
@@ -27,7 +32,7 @@ export default function FormRowDisplay (props) {
   return (
     <div>
       <Label>{props.title}</Label>
-      <Input>{props.value}</Input>
+      <Input><Value></Value>{props.value}</Input>
     </div>
   );
 }

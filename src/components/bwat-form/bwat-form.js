@@ -157,51 +157,59 @@ export class BWATForm extends React.Component {
   }
 
   onSubmit(e) {
+    // const scoresArray = [];
+    // Object.keys(e).forEach(function(key) {
+    //   if(key.includes('question')) {
+    //   scoresArray.push(e[key]);
+    // }});
+    // this.setState({scores: scoresArray, submitting: true});
+    // this.props.dispatch(generateScore(this.state.scores, this.state.score));
+    // console.log(this.props);
+    let self = this;
     const scoresArray = [];
     Object.keys(e).forEach(function(key) {
       if(key.includes('question')) {
-      scoresArray.push(e[key]);
-    }});
-    this.setState({scores: scoresArray, submitting: true});
-    this.props.dispatch(generateScore(this.state.scores, this.state.score));
-    console.log(this.props);
+        scoresArray.push(Number(e[key]));
+      }
+    });
+    let total = 13;
+    scoresArray.forEach(item => total += item);
+    console.log(total);
+    self.setState({score: total});
+    console.log(this.state.score);
 
-
-    // axios({
-    //   method: 'post',
-    //   url: `${API_BASE_URL}/forms`,
-    //   data: {
-    //     client_id: this.state.clientId,
-    //     date_of_form: this.state.date_of_form,
-    //     wound_location: e[`wound_location`],
-    //     shape_of_wound: e[`shape`],
-    //     question_one: e[`question_one`],
-    //     question_two: e[`question_two`],
-    //     question_three: e[`question_three`],
-    //     question_four: e[`question_four`],
-    //     question_five: e[`question_five`],
-    //     question_six: e[`question_six`],
-    //     question_seven: e[`question_seven`],
-    //     question_eight: e[`question_eight`],
-    //     question_nine: e[`question_nine`],
-    //     question_ten: e[`question_ten`],
-    //     question_eleven: e[`question_eleven`],
-    //     question_twelve: e[`question_twelve`],
-    //     question_thirteen: e[`question_thirteen`],
-    //     score: this.state.score
-    //   }
-    // }).then(function (response) {
-      //   this.setState({
-      //   submitting: true
-      // })
-      // })
-  // .catch(function (error) {
-  //  console.log(error);
-  // })
+    axios({
+      method: 'post',
+      url: `${API_BASE_URL}/forms`,
+      data: {
+        client_id: this.state.clientId,
+        date_of_form: this.state.date_of_form,
+        wound_location: e[`wound_location`],
+        shape_of_wound: e[`shape`],
+        question_one: e[`question_one`],
+        question_two: e[`question_two`],
+        question_three: e[`question_three`],
+        question_four: e[`question_four`],
+        question_five: e[`question_five`],
+        question_six: e[`question_six`],
+        question_seven: e[`question_seven`],
+        question_eight: e[`question_eight`],
+        question_nine: e[`question_nine`],
+        question_ten: e[`question_ten`],
+        question_eleven: e[`question_eleven`],
+        question_twelve: e[`question_twelve`],
+        question_thirteen: e[`question_thirteen`],
+        score: total
+      }
+    }).then(function (response) {
+        self.setState({
+        submitting: true
+      })})
+  .catch(function (error) {
+   console.log(error);
+  })
 
 }
-
-
   render () {
 
     if(!this.state.clientSelected) {
@@ -437,7 +445,8 @@ export class BWATForm extends React.Component {
 
     return (
       <Wrapper>
-        <FormRowDisplay title='Your Form has been successfully added! Your Weekly Score:' value={this.props.score} />
+        <Title header>Your Form has been successfully added! </Title>
+        <Input>Your Weekly Score: {this.state.score}</Input>
       </Wrapper>
     );
   }

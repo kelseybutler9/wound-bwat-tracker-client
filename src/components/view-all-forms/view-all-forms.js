@@ -10,6 +10,7 @@ import {fetchClients, fetchClient, fetchForms} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
+import {Moment, moment} from 'react-moment';
 
 const Wrapper = styled.div`
   max-width:400px;
@@ -117,6 +118,10 @@ export class ViewAllForms extends React.Component {
 
       axios.get(`${API_BASE_URL}/clients/${newId}`)
       .then(function (response) {
+        let date = response.data.start_date.split('T');
+        response.data.start_date = date[0];
+        date = response.data.end_date.split('T');
+        response.data.end_date = date[0];
         self.setState({client: response.data});
         console.log(self.state.client);
       })
@@ -128,13 +133,13 @@ export class ViewAllForms extends React.Component {
       .then(function (response) {
         const formsArray = [];
         response.data.forEach(function(form){
-          formsArray.push(form);
-          // if(form['client_id']===`${newId}`){
-          //   formsArray.push(form);
-          // }
+          if(form['client_id']===`${newId}`){
+            let date = form.date_of_form.split('T');
+            form.date_of_form = date[0];
+            formsArray.push(form);
+          }
         });
         self.setState({forms: formsArray});
-        console.log(self.state.forms);
       })
       .catch(function (error) {
         console.log(error);

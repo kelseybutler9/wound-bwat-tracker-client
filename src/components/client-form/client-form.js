@@ -60,7 +60,7 @@ const InputWrapper = styled.ul`
   margin:0;
 `;
 
-const Label = styled.label`
+const InputLabel = styled.label`
   display: block;
   float: left;
   margin-top: -19px;
@@ -142,13 +142,14 @@ export class ClientForm extends React.Component {
   onEndChange = date => this.setState({endDate: date});
 
   render () {
-
        if (this.state.complete) {
            return (
              <Wrapper>
                <div>
-                 <Label>{this.feedback}</Label>
-                 <Button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></Button>
+                 <InputLabel>{this.feedback}</InputLabel>
+                 <ButtonWrapper>
+                  <Button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></Button>
+                  </ButtonWrapper>
                </div>
              </Wrapper>
            );
@@ -157,8 +158,10 @@ export class ClientForm extends React.Component {
        if (this.state.error) {
            return (
              <Wrapper>
-                 <Label>{this.feedback}</Label>
-                 <Button><Link to={'/new-client'}>Create a New Client</Link></Button>
+                 <InputLabel>{this.feedback}</InputLabel>
+                 <ButtonWrapper>
+                  <Button><Link to={'/new-client'}>Create a New Client</Link></Button>
+                </ButtonWrapper>
              </Wrapper>
            );
        }
@@ -172,29 +175,29 @@ export class ClientForm extends React.Component {
             <FormCategoryRow title='Client Name' />
             <InputWrapper>
               <Input>
-                <Label>First Name</Label>
+                <InputLabel>First Name</InputLabel>
                 <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <Label>Last Name</Label>
+                <InputLabel>Last Name</InputLabel>
                 <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <FormCategoryRow title='Client Location' />
               <Input>
-                <Label>Hospital Name</Label>
+                <InputLabel>Hospital Name</InputLabel>
                 <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <Label>City</Label>
+                <InputLabel>City</InputLabel>
                 <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <Label>State</Label>
+                <InputLabel>State</InputLabel>
                 <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <FormCategoryRow title='Time Frame' />
               <Input>
-                <Label>Start Date</Label>
+                <InputLabel>Start Date</InputLabel>
                 <DatePicker
                    name='startDate'
                    onChange={this.onStartChange}
@@ -202,7 +205,7 @@ export class ClientForm extends React.Component {
                 />
               </Input>
               <Input>
-                <Label>End Date</Label>
+                <InputLabel>End Date</InputLabel>
                 <DatePicker
                   name='endDate'
                   onChange={this.onEndChange}
@@ -211,12 +214,12 @@ export class ClientForm extends React.Component {
               </Input>
               <FormCategoryRow title='Client Information' />
               <Input>
-                <Label>Age</Label>
+                <InputLabel>Age</InputLabel>
                 <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <Label>Weight</Label>
-                <Field name='weight' type='text' Label='Weight' component= 'input' validate={[required, nonEmpty]} />
+                <InputLabel>Weight</InputLabel>
+                <Field name='weight' type='text' InputLabel='Weight' component= 'input' validate={[required, nonEmpty]} />
               </Input>
             </InputWrapper>
             <ButtonWrapper>
