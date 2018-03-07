@@ -1,7 +1,7 @@
 import * as actions from './actions';
 
 const initialState = {
-  score: 13
+  score: 0
 }
 
 export const appReducer = (state = initialState, action) => {
@@ -12,6 +12,7 @@ export const appReducer = (state = initialState, action) => {
       newScore += item;
     });
     action.score = newScore;
+    console.log(newScore);
     return Object.assign({}, state, {
       score: action.score
     });

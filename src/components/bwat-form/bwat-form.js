@@ -6,7 +6,7 @@ import ClientForm from '../client-form/client-form';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-date-picker';
-import connect from 'react-redux';
+import {connect} from 'react-redux';
 import {fetchClients, generateScore} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
@@ -121,7 +121,8 @@ export class BWATForm extends React.Component {
       question_thirteen: ['1 = 100% wound covered, surface intact','2 = 75% to 100% wound covered &/or epithelial tissue extends >0.5cm into wound bed','3 = 50% to 75% wound covered &/or epithelial tissue extends to  less than 0.5cm into wound bed','4 = 25% to 50% wound covered','5 = less than 25% wound covered'],
       score: 13,
       submitting: false,
-      feedback: ''
+      feedback: '',
+      scores: []
     }
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -156,14 +157,15 @@ export class BWATForm extends React.Component {
   }
 
   onSubmit(e) {
-    const scores = [];
+    const scoresArray = [];
     Object.keys(e).forEach(function(key) {
       if(key.includes('question')) {
-      scores.push(e[key]);
+      scoresArray.push(e[key]);
     }});
-    console.log(scores);
-    this.props.dispatch(generateScore(scores));
-    console.log(this.state.score);
+    this.setState({scores: scoresArray, submitting: true});
+    this.props.dispatch(generateScore(this.state.scores, this.state.score));
+    console.log(this.props);
+
 
     // axios({
     //   method: 'post',
@@ -435,12 +437,19 @@ export class BWATForm extends React.Component {
 
     return (
       <Wrapper>
-        <FormRowDisplay title='Your Form has been successfully added! Your Weekly Score:' value={this.state.score} />
+        <FormRowDisplay title='Your Form has been successfully added! Your Weekly Score:' value={this.props.score} />
       </Wrapper>
     );
   }
 }
 
-export default reduxForm({
-  form: 'bwat'
-})(BWATForm);
+export const mapStateToProps = state => ({
+    score: state.score
+});
+
+BWATForm = connect(mapStateToProps)(BWATForm);
+BWATForm = reduxForm({form: 'bwat'})(BWATForm);
+export default BWATForm;
+// export default connect(mapStateToProps, actions)(reduxForm({
+//   form: 'bwat',
+// })(BWATForm));

@@ -2,7 +2,7 @@ import React from 'react';
 import {Field} from 'redux-form';
 import {required, nonEmpty} from '../../validators';
 import FormRowInput from '../form-row-input/form-row-input';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import FormRowDisplay from '../form-row-display/form-row-display';
 import {reduxForm} from 'redux-form';
 import styled, {css} from 'styled-components';
@@ -80,6 +80,10 @@ export class LogIn extends React.Component {
   }
 
   render() {
+    // if(this.state.loggedIn) {
+    //   return <Redirect to="/" />;
+    // }
+
     return (
       <Wrapper>
         <form

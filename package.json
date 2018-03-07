@@ -23,6 +23,9 @@
     "lint": "semistandard | snazzy"
   },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react-test-renderer": "^16.2.0",
     "semistandard": "^12.0.0",
     "snazzy": "^7.0.0"
   }
