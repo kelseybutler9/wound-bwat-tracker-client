@@ -143,11 +143,10 @@ export class BWATForm extends React.Component {
   onDateChange = date => this.setState({date_of_form: date});
 
   onChange(e) {
+      console.log(e);
       const self = this;
       const name = e.target.value;
       const nameId = name.split("-");
-      console.log(nameId[1]);
-      console.log(nameId[0]);
       self.setState(
         { clientId: nameId[1],
           clientSelected: true,
@@ -228,7 +227,7 @@ export class BWATForm extends React.Component {
               </Field>
             </Input>
             <ButtonWrapper>
-              <Button><Link to={'/new-client'}>Create New Client</Link></Button>
+              <Button className="add-client"><Link to={'/new-client'}>Create New Client</Link></Button>
             </ButtonWrapper>
           </form>
         </Wrapper>
@@ -446,19 +445,19 @@ export class BWATForm extends React.Component {
     return (
       <Wrapper>
         <Title header>Your Form has been successfully added! </Title>
-        <Input>Your Weekly Score: {this.state.score}</Input>
+        <Input className="success">Your Weekly Score: {this.state.score}</Input>
       </Wrapper>
     );
   }
 }
 
-export const mapStateToProps = state => ({
-    score: state.score
-});
-
-BWATForm = connect(mapStateToProps)(BWATForm);
-BWATForm = reduxForm({form: 'bwat'})(BWATForm);
-export default BWATForm;
-// export default connect(mapStateToProps, actions)(reduxForm({
-//   form: 'bwat',
-// })(BWATForm));
+// export const mapStateToProps = state => ({
+//     score: state.score
+// });
+//
+// BWATForm = connect(mapStateToProps)(BWATForm);
+// BWATForm = reduxForm({form: 'bwat'})(BWATForm);
+// export default BWATForm;
+export default reduxForm({
+  form: 'bwat',
+})(BWATForm);

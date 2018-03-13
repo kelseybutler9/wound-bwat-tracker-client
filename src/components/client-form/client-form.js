@@ -60,7 +60,7 @@ const InputWrapper = styled.ul`
   margin:0;
 `;
 
-const InputLabel = styled.label`
+const Label = styled.label`
   display: block;
   float: left;
   margin-top: -19px;
@@ -79,6 +79,7 @@ const Input = styled.li`
   border:1px solid #DDDDDD;
   margin-bottom: 30px;
   border-radius: 3px;
+  height: 40px;
 `;
 
 const Question = styled.div`
@@ -92,13 +93,17 @@ const Question = styled.div`
  font-size: .75em;
 `;
 
+const Value = styled.div`
+  height: 10px;
+`;
+
 export class ClientForm extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       firstName: '',
-      startDate: new Date(),
-      endDate: new Date(),
+      start_date: new Date(),
+      end_date: new Date(),
       feedback: '',
       complete: false,
       error: false
@@ -118,8 +123,8 @@ export class ClientForm extends React.Component {
          hospital_name: e[`hospitalName`],
          city: e[`city`],
          client_state: e[`clientState`],
-         start_date: self.state.startDate,
-         end_date: self.state.endDate,
+         start_date: self.state.start_date,
+         end_date: self.state.end_date,
          age: e[`age`],
          weight: e[`weight`]
        }
@@ -138,15 +143,15 @@ export class ClientForm extends React.Component {
    })})
  }
 
-  onStartChange = date => this.setState({startDate: date});
-  onEndChange = date => this.setState({endDate: date});
+  onStartChange = date => this.setState({start_date: date.toISOString()});
+  onEndChange = date => this.setState({end_date: date.toISOString()});
 
   render () {
        if (this.state.complete) {
            return (
              <Wrapper>
                <div>
-                 <InputLabel>{this.feedback}</InputLabel>
+                 <Label>{this.feedback}</Label>
                  <ButtonWrapper>
                   <Button><Link to={'/new-form'}>Create a BWAT Form for {this.state.firstName}</Link></Button>
                   </ButtonWrapper>
@@ -158,7 +163,7 @@ export class ClientForm extends React.Component {
        if (this.state.error) {
            return (
              <Wrapper>
-                 <InputLabel>{this.feedback}</InputLabel>
+                 <Label>{this.feedback}</Label>
                  <ButtonWrapper>
                   <Button><Link to={'/new-client'}>Create a New Client</Link></Button>
                 </ButtonWrapper>
@@ -175,51 +180,58 @@ export class ClientForm extends React.Component {
             <FormCategoryRow title='Client Name' />
             <InputWrapper>
               <Input>
-                <InputLabel>First Name</InputLabel>
+                <Value></Value>
+                <Label>First Name</Label>
                 <Field name='firstName' type='text' component='input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <InputLabel>Last Name</InputLabel>
+                <Value></Value>
+                <Label>Last Name</Label>
                 <Field name='lastName' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <FormCategoryRow title='Client Location' />
               <Input>
-                <InputLabel>Hospital Name</InputLabel>
+                <Value></Value>
+                <Label>Hospital Name</Label>
                 <Field name='hospitalName' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <InputLabel>City</InputLabel>
+                <Value></Value>
+                <Label>City</Label>
                 <Field name='city' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <InputLabel>State</InputLabel>
+                <Value></Value>
+                <Label>State</Label>
                 <Field name='clientState' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <FormCategoryRow title='Time Frame' />
               <Input>
-                <InputLabel>Start Date</InputLabel>
+                <Label>Start Date</Label>
                 <DatePicker
-                   name='startDate'
+                   name='start_date'
                    onChange={this.onStartChange}
-                   value={this.state.startDate}
+                   value={this.state.start_date}
                 />
               </Input>
               <Input>
-                <InputLabel>End Date</InputLabel>
+                <Label>End Date</Label>
                 <DatePicker
-                  name='endDate'
+                  name='end_date'
                   onChange={this.onEndChange}
-                  value={this.state.endDate}
+                  value={this.state.end_date}
                 />
               </Input>
               <FormCategoryRow title='Client Information' />
               <Input>
-                <InputLabel>Age</InputLabel>
+                <Value></Value>
+                <Label>Age</Label>
                 <Field name='age' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
               <Input>
-                <InputLabel>Weight</InputLabel>
-                <Field name='weight' type='text' InputLabel='Weight' component= 'input' validate={[required, nonEmpty]} />
+                <Value></Value>
+                <Label>Weight</Label>
+                <Field name='weight' type='text' component= 'input' validate={[required, nonEmpty]} />
               </Input>
             </InputWrapper>
             <ButtonWrapper>

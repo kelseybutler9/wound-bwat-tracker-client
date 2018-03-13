@@ -12,7 +12,6 @@ export const appReducer = (state = initialState, action) => {
       newScore += item;
     });
     action.score = newScore;
-    console.log(newScore);
     return Object.assign({}, state, {
       score: action.score
     });

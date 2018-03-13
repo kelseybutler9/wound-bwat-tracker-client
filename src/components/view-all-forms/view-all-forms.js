@@ -10,7 +10,6 @@ import {fetchClients, fetchClient, fetchForms} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
-import {Moment, moment} from 'react-moment';
 
 const Wrapper = styled.div`
   max-width:400px;
@@ -185,8 +184,8 @@ export class ViewAllForms extends React.Component {
           <FormRowDisplay title='State' value={this.state.client.client_state} />
 
           <FormCategoryRow title='Time Frame' />
-          <FormRowDisplay title='Start Date' value={this.state.client.startDate} />
-          <FormRowDisplay title='End Date' value={this.state.client.endDate} />
+          <FormRowDisplay title='Start Date' value={this.state.client.start_date} />
+          <FormRowDisplay title='End Date' value={this.state.client.end_date} />
 
           <FormCategoryRow title='Client Information' />
           <FormRowDisplay title='Age' value={this.state.client.age} />
