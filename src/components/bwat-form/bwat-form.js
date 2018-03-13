@@ -7,7 +7,6 @@ import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-date-picker';
 import {connect} from 'react-redux';
-import {fetchClients, generateScore} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import styled, {css} from 'styled-components';
@@ -124,7 +123,6 @@ export class BWATForm extends React.Component {
       feedback: '',
       scores: []
     }
-
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -143,7 +141,6 @@ export class BWATForm extends React.Component {
   onDateChange = date => this.setState({date_of_form: date});
 
   onChange(e) {
-      console.log(e);
       const self = this;
       const name = e.target.value;
       const nameId = name.split("-");
@@ -156,14 +153,6 @@ export class BWATForm extends React.Component {
   }
 
   onSubmit(e) {
-    // const scoresArray = [];
-    // Object.keys(e).forEach(function(key) {
-    //   if(key.includes('question')) {
-    //   scoresArray.push(e[key]);
-    // }});
-    // this.setState({scores: scoresArray, submitting: true});
-    // this.props.dispatch(generateScore(this.state.scores, this.state.score));
-    // console.log(this.props);
     let self = this;
     const scoresArray = [];
     Object.keys(e).forEach(function(key) {
@@ -173,9 +162,7 @@ export class BWATForm extends React.Component {
     });
     let total = 13;
     scoresArray.forEach(item => total += item);
-    console.log(total);
     self.setState({score: total});
-    console.log(this.state.score);
 
     axios({
       method: 'post',
@@ -451,13 +438,6 @@ export class BWATForm extends React.Component {
   }
 }
 
-// export const mapStateToProps = state => ({
-//     score: state.score
-// });
-//
-// BWATForm = connect(mapStateToProps)(BWATForm);
-// BWATForm = reduxForm({form: 'bwat'})(BWATForm);
-// export default BWATForm;
 export default reduxForm({
   form: 'bwat',
 })(BWATForm);

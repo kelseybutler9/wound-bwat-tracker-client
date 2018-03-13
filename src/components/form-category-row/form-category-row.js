@@ -12,7 +12,7 @@ const Title = styled.h3`
 
 export default function FormCategoryRow (props) {
   return (
-    <Title className='form-category-row'>
+    <Title>
       {props.title}
     </Title>
   );

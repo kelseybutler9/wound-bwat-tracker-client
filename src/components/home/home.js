@@ -51,9 +51,6 @@ const ButtonWrapper = styled.div`
 export class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: ''
-    }
   }
 
   render() {
@@ -62,7 +59,7 @@ export class Home extends React.Component {
         <Title>Welcome to the Wound Care Progression Tool</Title>
         <p id='description'>The Wound Care Progression Tool is used for tracking a wounds progress from start to finish. This app allows users to add BWAT forms for a client wound and recieve the BWAT score immediately. The goal of the app is not only to view and add these forms but use the application in a sales setting. The decreasing BWAT score is easily accessible to quickly prove your credibility to future customers.</p>
         <ButtonWrapper>
-          <Button><Link to={`/login`}>Log In</Link></Button>
+          <Button><Link to={`/new-form`}>Create BWAT Form</Link></Button>
         </ButtonWrapper>
       </Wrapper>
     );

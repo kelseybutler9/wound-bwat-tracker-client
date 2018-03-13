@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
-import BWATForm from './bwat-preview';
+import BWATForm from './bwat-form';
+import {API_BASE_URL} from '../../config.js';
 
 describe('<BWATForm />', () => {
   it('Renders without crashing', () => {
@@ -29,4 +29,28 @@ it('Should switch to success message when the add button is clicked', () => {
         wrapper.simulate('submit');
         expect(wrapper.hasClass('success')).toEqual(true);
         expect(wrapper.state('submitting')).toEqual(true);
+});
+
+jest.mock('axios', () => {
+  const clients = [
+    {first_name: 'New Client', last_name: 'New', hospital_name: 'Hospital', city: 'Chicago', client_state: 'Ilinois', start_date: 2018-03-09T06:00:00.000Z, end_date: 2018-03-13T05:00:00.000Z,age: 12,weight: 21}
+  ];
+
+  return {
+    get: jest.fn(() => Promise.resolve(clients)),
+  };
+});
+
+const axios = require('axios');
+
+it('fetch clients on #componentDidMount', () => {
+  const wrapper = shallow(<BWATForm />);
+  wrapper.instance().componentDidMount().then(() => {
+    expect(axios.get).toHaveBeenCalled();
+    expect(axios.get).toHaveBeenCalledWith({API_BASE_URL});
+    expect(app.state()).toHaveProperty('clients', [
+            {first_name: 'New Client', last_name: 'New', hospital_name: 'Hospital', city: 'Chicago', client_state: 'Ilinois', start_date: 2018-03-09T06:00:00.000Z, end_date: 2018-03-13T05:00:00.000Z,age: 12,weight: 21}
+    ]);
+    done();
+  });
 });

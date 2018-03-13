@@ -6,7 +6,6 @@ import BWATPreview from '../bwat-preview/bwat-preview';
 import {reduxForm, Field} from 'redux-form';
 import {required, nonEmpty} from '../../validators';
 import connect from 'react-redux';
-import {fetchClients, fetchClient, fetchForms} from '../../actions';
 import {API_BASE_URL} from '../../config.js';
 import axios from 'axios';
 import styled, {css} from 'styled-components';

@@ -39,8 +39,6 @@ export default function App(props) {
         </header>
         <main>
           <Route exact path='/' component={Home} />
-          <Route exact path='/login' component={LogIn} />
-          <Route exact path='/signup' component={SignUp} />
           <Route exact path='/new-form' component={BWATForm} />
           <Route exact path='/new-client' component={ClientForm} />
           <Route exact path='/forms' component={ViewAllForms} />

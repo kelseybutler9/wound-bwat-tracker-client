@@ -1,7 +1,6 @@
 import React from 'react';
 import {reduxForm, Field} from 'redux-form';
 import FormCategoryRow from '../form-category-row/form-category-row';
-import FormRowInput from '../form-row-input/form-row-input';
 import {required, nonEmpty} from '../../validators';
 import {Link} from 'react-router-dom';
 import DatePicker from 'react-date-picker';
