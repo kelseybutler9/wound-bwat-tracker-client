@@ -47,7 +47,7 @@ it('fetch clients on #componentDidMount', () => {
   const wrapper = shallow(<BWATForm />);
   wrapper.instance().componentDidMount().then(() => {
     expect(axios.get).toHaveBeenCalled();
-    expect(axios.get).toHaveBeenCalledWith({API_BASE_URL});
+    expect(axios.get).toHaveBeenCalledWith(`${API_BASE_URL}/clients`);
     expect(app.state()).toHaveProperty('clients', [
             {first_name: 'New Client', last_name: 'New', hospital_name: 'Hospital', city: 'Chicago', client_state: 'Ilinois', start_date: 2018-03-09T06:00:00.000Z, end_date: 2018-03-13T05:00:00.000Z,age: 12,weight: 21}
     ]);

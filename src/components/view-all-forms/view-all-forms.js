@@ -155,7 +155,7 @@ export class ViewAllForms extends React.Component {
     if(!this.state.clientSelected) {
       return (
         <Wrapper>
-        <Input>
+        <Input className="add-client">
           <Label>Select a Client</Label>
           <Field name='client-type' component='select' validate={[required, nonEmpty]} onChange={this.onChange}>
             {this.state.clients.map(client => (
@@ -171,7 +171,7 @@ export class ViewAllForms extends React.Component {
 
     return (
       <Wrapper>
-        <div>
+        <div className='forms'>
           <Title>Client</Title>
           <FormCategoryRow title='Client Name' />
           <FormRowDisplay title='First Name' value={this.state.client.first_name} />

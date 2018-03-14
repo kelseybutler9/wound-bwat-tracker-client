@@ -101,18 +101,7 @@ export class ViewBWATForm extends React.Component {
       },
       form: {},
       questionValues: [],
-      client: {
-        id: "5a6541b39293b078f266ae57",
-        first_name: "Kelsey",
-        last_name: "Butler",
-        hospital_name: "Matilda",
-        city: "Columbus",
-        client_state: "Ohio",
-        start_date: "2017-06-08T19:30:39.000Z",
-        end_date: "2017-06-08T19:30:39.000Z",
-        age: 23,
-        weight: 130
-      }
+      client: {}
     };
   }
 
@@ -120,7 +109,7 @@ export class ViewBWATForm extends React.Component {
     const self = this;
     const url = window.location.href;
     const formId = url.split('http://localhost:3000/view/');
-      axios.get(`${API_BASE_URL}/forms/${formId[1]}`)
+    axios.get(`${API_BASE_URL}/forms/${formId[1]}`)
       .then(function (response) {
         let date = response.data.date_of_form.split('T');
         response.data.date_of_form = date[0];
@@ -145,7 +134,7 @@ export class ViewBWATForm extends React.Component {
   render() {
   return (
 
-    <Wrapper>
+    <Wrapper className="form">
       <Title>{this.state.client.first_name} {this.state.client.last_name} BWAT Form - {this.state.form.date_of_form}</Title>
       <Title header>BWAT Wound Form</Title>
 
