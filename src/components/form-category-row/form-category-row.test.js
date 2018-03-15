@@ -7,12 +7,12 @@ describe('<FormCategoryRow />', () => {
   it('Renders without crashing', () => {
     shallow(<FormCategoryRow />);
   });
-});
 
-it('Renders the title', () => {
-  const title = "Foo";
-  const wrapper = shallow(
-    <FormCategoryRow title={title} />
-  );
-  expect(wrapper.contains({title})).toEqual(true);
+  it('Renders the title', () => {
+    const title = "Foo";
+    const wrapper = shallow(
+      <FormCategoryRow title={title} />
+    );
+    expect(wrapper.prop('title')).toEqual(title);
+  });
 });

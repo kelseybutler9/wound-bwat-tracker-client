@@ -15,6 +15,6 @@ it('Renders the props', () => {
   const wrapper = shallow(
     <FormRowDisplay title={title}  value={value}/>
   );
-  expect(wrapper.contains({title})).toEqual(true);
-  expect(wrapper.contains({value})).toEqual(true);
+  expect(wrapper.prop('title')).toEqual(title);
+  expect(wrapper.prop('value')).toEqual(value);
 });
