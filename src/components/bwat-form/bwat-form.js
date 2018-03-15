@@ -201,7 +201,7 @@ export class BWATForm extends React.Component {
     if(!this.state.clientSelected) {
       return(
         <Wrapper>
-          <form>
+          <form className="add-client">
             <Title>BWAT Wound Form</Title>
             <Input>
               <Label>Select an existing client</Label>
@@ -214,7 +214,7 @@ export class BWATForm extends React.Component {
               </Field>
             </Input>
             <ButtonWrapper>
-              <Button className="add-client"><Link to={'/new-client'}>Create New Client</Link></Button>
+              <Button><Link to={'/new-client'}>Create New Client</Link></Button>
             </ButtonWrapper>
           </form>
         </Wrapper>
