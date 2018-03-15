@@ -13,6 +13,6 @@ describe('<FormCategoryRow />', () => {
     const wrapper = shallow(
       <FormCategoryRow title={title} />
     );
-    expect(wrapper.prop('title')).toEqual(title);
+    expect(wrapper.prop('title')).toEqual('Foo');
   });
 });
