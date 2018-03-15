@@ -18,7 +18,7 @@ it('Should render the forms when client selected', () => {
         const wrapper = shallow(<ViewBWATForm />);
         expect(wrapper.state('form').isEmpty()).to.equal(false);
         expect(wrapper.client('forms')).toEqual(true);
-        expect(wrapper.state('clients').length.greaterThan(0);
+        expect(wrapper.state('clients').isEmpty().to.toEqual(false);;
 });
 
 jest.mock('axios', () => {

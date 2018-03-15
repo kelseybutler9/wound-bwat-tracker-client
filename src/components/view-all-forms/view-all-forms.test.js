@@ -20,7 +20,7 @@ it('Should render the forms when client selected', () => {
         wrapper.update();
         expect(wrapper.state('clientSelected')).toEqual(true);
         expect(wrapper.hasClass('forms')).toEqual(true);
-        expect(wrapper.state('clients').length.greaterThan(0);
+        expect(wrapper.state('clients').isEmpty().to.toEqual(false);
 });
 
 jest.mock('axios', () => {

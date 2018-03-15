@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import FormRowDisplay from './app';
+import FormRowDisplay from './form-row-display';
 
 describe('<FormRowDisplay />', () => {
   it('Renders without crashing', () => {
@@ -15,5 +15,6 @@ it('Renders the props', () => {
   const wrapper = shallow(
     <FormRowDisplay title={title}  value={value}/>
   );
-  expect(wrapper.contains(<div><Label>{title}</Label><Input><Value></Value>{value}</Input></div>)).toEqual(true);
+  expect(wrapper.contains({title})).toEqual(true);
+  expect(wrapper.contains({value})).toEqual(true);
 });

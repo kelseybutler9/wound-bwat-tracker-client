@@ -10,18 +10,17 @@ describe('<BWATForm />', () => {
 
   it('Should render the bwat form when client selected', () => {
           const wrapper = shallow(<BWATForm />);
-          wrapper.find('select').simulate('keyDown', { keyCode: 40 });
+          wrapper.find('Field').simulate('keyDown', { keyCode: 40 });
           wrapper.update();
           expect(wrapper.state('clientSelected')).toEqual(true);
           expect(wrapper.state('submitting')).toEqual(false);
   });
 
-  it('Should switch to success message when the add button is clicked', () => {
+  it('Should switch to submitting when the add button is clicked', () => {
           const wrapper = shallow(<BWATForm />);
-          wrapper.find('select').simulate('keyDown', { keyCode: 40 });
+          wrapper.find('Field').simulate('keyDown', { keyCode: 40 });
           wrapper.update();
           wrapper.simulate('submit');
-          expect(wrapper.hasClass('success')).toEqual(true);
           expect(wrapper.state('submitting')).toEqual(true);
   });
 

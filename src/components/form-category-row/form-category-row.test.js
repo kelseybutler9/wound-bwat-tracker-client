@@ -14,5 +14,5 @@ it('Renders the title', () => {
   const wrapper = shallow(
     <FormCategoryRow title={title} />
   );
-  expect(wrapper.contains(<Title>{title}</Title>)).toEqual(true);
+  expect(wrapper.contains({title})).toEqual(true);
 });
