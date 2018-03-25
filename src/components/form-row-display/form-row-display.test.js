@@ -9,11 +9,10 @@ describe('<FormRowDisplay />', () => {
   });
 
   it('Renders the props', () => {
-    const title = "Foo";
-    const value = "bar";
     const wrapper = shallow(
-      <FormRowDisplay title={title}  value={value}/>
+      <FormRowDisplay title='Foo'  value='bar'/>
     );
+    console.log(wrapper.prop('title'));
     expect(wrapper.prop('title')).toEqual('Foo');
     expect(wrapper.prop('value')).toEqual('bar');
   });

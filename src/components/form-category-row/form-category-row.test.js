@@ -9,10 +9,10 @@ describe('<FormCategoryRow />', () => {
   });
 
   it('Renders the title', () => {
-    const title = "Foo";
     const wrapper = shallow(
-      <FormCategoryRow title={title} />
+      <FormCategoryRow title='Foo' />
     );
+    console.log(wrapper.prop('title'));
     expect(wrapper.prop('title')).toEqual('Foo');
   });
 });

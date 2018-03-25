@@ -27,8 +27,7 @@ const Value = styled.div`
   height: 10px;
 `;
 
-export default function FormRowDisplay (props) {
-
+export default function FormRowDisplay(props) {
   return (
     <div>
       <Label>{props.title}</Label>
