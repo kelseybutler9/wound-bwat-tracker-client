@@ -11,14 +11,13 @@ describe('<ViewBWATForm />', () => {
 
 it('Renders the add initially', () => {
     const wrapper = shallow(<ViewBWATForm />);
-    expect(wrapper.contains('BWAT Wound Form')).toEqual(true);
+    expect(wrapper.contains('BWAT')).toEqual(true);
 });
 
 it('Should render the forms when client selected', () => {
         const wrapper = shallow(<ViewBWATForm />);
         expect(wrapper.state('form')).isEmpty().to.toEqual(false);
-        expect(wrapper.state.client('forms')).isEmpty().to.toEqual(true);
-        expect(wrapper.state('clients')).isEmpty().to.toEqual(false);
+        expect(wrapper.state('client')).isEmpty().to.toEqual(false);
 });
 
 jest.mock('axios', () => {
