@@ -12,7 +12,7 @@ describe('<FormCategoryRow />', () => {
     const wrapper = shallow(
       <FormCategoryRow title='Foo' />
     );
-    console.log(wrapper.find('title').text());
+    //console.log(wrapper.find('title').text());
     //expect(wrapper.prop('title')).toEqual('Foo');
     //expect(wrapper.find('Title').text().toEqual('Foo'));
     expect(wrapper.contains('Foo')).toEqual(true);
