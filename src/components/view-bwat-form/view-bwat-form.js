@@ -152,7 +152,6 @@ export class ViewBWATForm extends React.Component {
       <FormRowDisplay title='11. Peripheral Tissue Induration' value={this.state.questionValues[12]} />
       <FormRowDisplay title='12. Granulation Tissue' value={this.state.questionValues[13]} />
       <FormRowDisplay title='13. Epithelialization' value={this.state.questionValues[14]} />
-
       <FormCategoryRow title='Weekly Score' />
       <FormRowDisplay title={this.state.form.date_of_form} value={this.state.form.score} />
       <ButtonWrapper>
