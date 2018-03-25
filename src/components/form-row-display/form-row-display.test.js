@@ -12,8 +12,7 @@ describe('<FormRowDisplay />', () => {
     const wrapper = shallow(
       <FormRowDisplay title='Foo'  value='bar'/>
     );
-    console.log(wrapper.prop('title'));
-    expect(wrapper.prop('title')).toEqual('Foo');
-    expect(wrapper.prop('value')).toEqual('bar');
+    expect(wrapper.contains('Foo')).toEqual(true);
+    expect(wrapper.contains('bar')).toEqual(true);
   });
 });

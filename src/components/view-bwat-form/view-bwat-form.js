@@ -133,11 +133,9 @@ export class ViewBWATForm extends React.Component {
 
   render() {
   return (
-
     <Wrapper className="form">
       <Title>{this.state.client.first_name} {this.state.client.last_name} BWAT Form - {this.state.form.date_of_form}</Title>
       <Title header>BWAT Wound Form</Title>
-
       <FormCategoryRow title='Wound Information' />
       <FormRowDisplay title='Where is the wound located? Anatomic site' value={this.state.questionValues[0]} />
       <FormRowDisplay title='Shape: Overall wound patter; assess by observing perimeter and depth.' value={this.state.questionValues[1]} />
