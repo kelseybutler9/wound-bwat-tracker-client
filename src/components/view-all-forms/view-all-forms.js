@@ -121,7 +121,6 @@ export class ViewAllForms extends React.Component {
         date = response.data.end_date.split('T');
         response.data.end_date = date[0];
         self.setState({client: response.data});
-        console.log(self.state.client);
       })
       .catch(function (error) {
         console.log(error);

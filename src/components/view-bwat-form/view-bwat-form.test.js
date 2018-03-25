@@ -38,7 +38,7 @@ jest.mock('axios', () => {
 
 const axios = require('axios');
 
-it('fetch form on #componentDidMount', () => {
+it('fetch form on #componentDidMount', async () => {
   const wrapper = shallow(<ViewBWATForm />);
   // wrapper.instance().componentDidMount().then(() => {
   //   expect(axios.get).toHaveBeenCalled();

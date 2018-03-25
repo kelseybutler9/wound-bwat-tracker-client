@@ -11,7 +11,7 @@ describe('<ViewAllForms />', () => {
 
 it('Renders the add client initially', () => {
     const wrapper = shallow(<ViewAllForms />);
-    expect(wrapper.hasClass('add-client')).toEqual(true);
+    expect(wrapper.contains('Select a Client')).toEqual(true);
 });
 
 it('Should render the forms when client selected', () => {
