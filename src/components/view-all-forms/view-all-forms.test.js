@@ -37,8 +37,8 @@ describe('<ViewAllForms />', () => {
           });
           wrapper.update();
           expect(wrapper.state('clientSelected')).toEqual(true);
-          expect(wrapper.state('clientId')).equals('').toEqual(false);
-          expect(wrapper.state('forms')).isEmpty().toEqual(false);
+          expect(wrapper.state('clientId')).equals('').to.equal(false);
+          expect(wrapper.state('forms')).isEmpty().to.equal(false);
   });
 });
 
